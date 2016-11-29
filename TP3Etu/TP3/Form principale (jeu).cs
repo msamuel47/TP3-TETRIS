@@ -6,7 +6,12 @@ namespace TP3
 {
   public partial class Form1 : Form
   {
-    public Form1( )
+#region ConstanteDeJeu
+
+
+
+#endregion
+        public Form1( )
     {
       InitializeComponent( );
 
@@ -27,7 +32,8 @@ namespace TP3
     {
       // Ne pas oublier de mettre en place les valeurs nécessaires à une partie.
       ExecuterTestsUnitaires();
-      InitialiserSurfaceDeJeu(20,10);
+      InitialiserSurfaceDeJeu(SharedVar.nbLignes,SharedVar.nbColonnes);
+      
     }
 
     private void InitialiserSurfaceDeJeu(int nbLignes, int nbCols)
@@ -99,7 +105,7 @@ namespace TP3
 
         private void CommencerLaPartie_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 

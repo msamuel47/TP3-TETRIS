@@ -7,10 +7,6 @@ using System.Threading.Tasks;
 
 namespace TP3
 {
-    class SharedVar
-    {
-        public int nbColonnes;
-        public int nbLignes
         enum TypeBloc
         {
             NONE,
@@ -23,8 +19,4 @@ namespace TP3
             S,
             Z,
         }
-
-
-
-    }
 }
