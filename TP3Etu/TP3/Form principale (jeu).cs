@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Media;
+using WMPLib;
 
 namespace TP3
 {
   public partial class Form1 : Form
   {
-
+        WindowsMediaPlayer mediaPlayer = new WindowsMediaPlayer();
         #region ConstanteDeJeu
         public   int nbColonnes = 10;
         public  int nbLignes = 20;
@@ -111,7 +111,9 @@ namespace TP3
 
         private void musiqueDambiacneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MediaPlayer.URL = "";
+            mediaPlayer.URL = "Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
+            
+            mediaPlayer.controls.play();
         }
     }
 
