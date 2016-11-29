@@ -21,5 +21,14 @@ namespace TP3
             S,
             Z,
         }
+        enum Mouvement
+        {
+            Mouvement_Descendre,
+            Mouvement_Gauche,
+            Mouvement_Droite,
+            Mouvement_RotationDroite,
+            Mouvement_RotationGauche
+
+        }
     }
 }
