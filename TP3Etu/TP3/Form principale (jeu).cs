@@ -102,7 +102,7 @@ namespace TP3
     }
 
         #endregion
-   
+        #region Code des gestions d'évènements
         private void personnaliserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Configuration_du_jeu config = new Configuration_du_jeu();
@@ -113,6 +113,7 @@ namespace TP3
         {
             
         }
+#endregion
     }
 
 
