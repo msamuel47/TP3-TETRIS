@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TypeBloc.cs" />
     <Compile Include="Variables partagées.cs" />
     <Compile Include="Configuration du jeu.cs">
       <SubType>Form</SubType>
