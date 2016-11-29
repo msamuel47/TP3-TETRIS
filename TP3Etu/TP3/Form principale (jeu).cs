@@ -2,11 +2,22 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Media;
+
 namespace TP3
 {
   public partial class Form1 : Form
   {
-    public Form1( )
+
+        #region ConstanteDeJeu
+        public   int nbColonnes = 10;
+        public  int nbLignes = 20;
+      public TypeBloc[,] tableauDeJeu = null;
+         
+         
+
+
+        #endregion
+        public Form1( )
     {
       InitializeComponent( );
 
@@ -27,7 +38,9 @@ namespace TP3
     {
       // Ne pas oublier de mettre en place les valeurs nécessaires à une partie.
       ExecuterTestsUnitaires();
-      InitialiserSurfaceDeJeu(20,10);
+      InitialiserSurfaceDeJeu(nbLignes,nbColonnes);
+
+      
     }
 
     private void InitialiserSurfaceDeJeu(int nbLignes, int nbCols)

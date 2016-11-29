@@ -6,18 +6,12 @@ using System.Threading.Tasks;
 
 namespace TP3
 {
-    public enum TypeBloc
+    enum Movement
     {
-        NONE,
-        FROZEN,
-        SQUARE,
-        LINE,
-        T,
-        L,
-        J,
-        S,
-        Z,
+        RIGHT,
+        LEFT,
+        DOWN,
+        ROTATE_CONTERCLOCKWISE,
+        ROTATE_CLOCKWISE,
     }
-
-  
 }
