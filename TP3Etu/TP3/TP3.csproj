@@ -119,8 +119,12 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="art\Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
