@@ -131,7 +131,7 @@ namespace TP3
                 }
             else
             if (mediaPlayer.playState == WMPPlayState.wmppsPlaying)
-                {
+                { // La musique a stop criss
                     mediaPlayer.controls.stop();
                 }
         }
