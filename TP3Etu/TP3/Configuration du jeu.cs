@@ -16,13 +16,13 @@ namespace TP3
         {
             InitializeComponent();
         }
-
+        
         public void ChangerLaTextBoxNbLignes_Scoll(object sender, EventArgs e)
         {
             nbLignes_TextBox.Text = nbLignes_TrackBar.Value.ToString();
             
         }
-
+        //Samuel V.
         private void InitialiserConfig_Load(object sender, EventArgs e)
         {
             nbLignes_TrackBar.Value = 20;
@@ -30,13 +30,13 @@ namespace TP3
             nbLignes_TextBox.Text = nbLignes_TrackBar.Value.ToString();
             nbColones_TextBox.Text = nbColones_TrackBar.Value.ToString();
         }
-
+        //Samuel V.
         public void ChangerLeNombreDeColones_Scroll(object sender, EventArgs e)
         {
             nbColones_TextBox.Text = nbColones_TrackBar.Value.ToString();
         }
         /// <summary>
-        /// Permet d'obtenir la dimension des colones
+        /// Permet d'obtenir la dimension des colones //Sam V.
         /// </summary>
         public int ObtenirDimensionColones()
         {
@@ -44,7 +44,7 @@ namespace TP3
             return retour;
         }
         /// <summary>
-        /// Permet d'obtenir la dimension des colones
+        /// Permet d'obtenir la dimension des colones //Sam V.
         /// </summary>
         /// <returns></returns>
         public int ObtenirDimensionLignes()

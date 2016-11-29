@@ -40,7 +40,7 @@ namespace TP3
         {
             // Ne pas oublier de mettre en place les valeurs nécessaires à une partie.
             ExecuterTestsUnitaires();
-
+            InitialiserJeu();
             InitialiserSurfaceDeJeu(nbLignes, nbColonnes);
         }
 
@@ -131,12 +131,35 @@ namespace TP3
                 }
             else
             if (mediaPlayer.playState == WMPPlayState.wmppsPlaying)
-                { // La musique a stop criss
+                { 
                     mediaPlayer.controls.stop();
                 }
         }
 
         #endregion
+
+        #region Affichage de la table de Jeu
+
+        private void DessinerTableDeJeu()
+        {
+            for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
+                {
+                    for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
+                        {
+                            if (tableauDeJeu[i, j] == TypeBloc.NONE)
+                                {
+                                    toutesImagesVisuelles[i, j].BackColor = Color.Black;
+                                }
+                            if (tableauDeJeu[i, j] == TypeBloc.FROZEN)
+                                {
+                                    toutesImagesVisuelles[i, j].BackColor = Color.Gray;
+                                }
+                        }
+                }
+        }
+       
+
+#endregion
 
         #region méthodes d'initialisation
 
@@ -153,6 +176,7 @@ namespace TP3
                             tableauDeJeu[i, j] = TypeBloc.NONE;
                         }
                 }
+            
         }
         //fait par félix
         /// <summary>
@@ -193,5 +217,10 @@ namespace TP3
         }
 
         #endregion
+
+        private void DebuterUnePartie_btnClick(object sender, EventArgs e)
+        {
+            DessinerTableDeJeu();
+        }
     }
 }

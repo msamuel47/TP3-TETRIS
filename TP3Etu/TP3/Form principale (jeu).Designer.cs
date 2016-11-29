@@ -37,6 +37,7 @@
             this.optionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.musiqueDambiacneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.personnaliserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.commencerLaPartie_btn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +63,7 @@
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableauJeu.Location = new System.Drawing.Point(173, 43);
             this.tableauJeu.Margin = new System.Windows.Forms.Padding(0);
             this.tableauJeu.Name = "tableauJeu";
@@ -161,11 +162,22 @@
             this.personnaliserToolStripMenuItem.Text = "Personnaliser ...";
             this.personnaliserToolStripMenuItem.Click += new System.EventHandler(this.personnaliserToolStripMenuItem_Click);
             // 
+            // commencerLaPartie_btn
+            // 
+            this.commencerLaPartie_btn.Location = new System.Drawing.Point(12, 137);
+            this.commencerLaPartie_btn.Name = "commencerLaPartie_btn";
+            this.commencerLaPartie_btn.Size = new System.Drawing.Size(75, 51);
+            this.commencerLaPartie_btn.TabIndex = 3;
+            this.commencerLaPartie_btn.Text = "Commencer";
+            this.commencerLaPartie_btn.UseVisualStyleBackColor = true;
+            this.commencerLaPartie_btn.Click += new System.EventHandler(this.DebuterUnePartie_btnClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 589);
+            this.Controls.Add(this.commencerLaPartie_btn);
             this.Controls.Add(this.tableauJeu);
             this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
@@ -191,6 +203,7 @@
         private System.Windows.Forms.ToolStripMenuItem optionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem musiqueDambiacneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem personnaliserToolStripMenuItem;
+        private System.Windows.Forms.Button commencerLaPartie_btn;
     }
 }
 
