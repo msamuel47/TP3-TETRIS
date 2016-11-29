@@ -111,7 +111,9 @@ namespace TP3
         #endregion
 
         #region méthodes d'initialisation
-
+        /// <summary>
+        /// Initialise la surface de jeu avec les paramètres que le joueur a choisi 
+        /// </summary>
         void InitialiserJeu()
         {
             tableauDeJeu = new TypeBloc[nbLignes, nbColonnes];
