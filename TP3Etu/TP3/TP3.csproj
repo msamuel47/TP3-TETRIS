@@ -63,6 +63,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Configuration du jeu.resx">
+      <DependentUpon>Configuration du jeu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form principale %28jeu%29.resx">
       <DependentUpon>Form principale %28jeu%29.cs</DependentUpon>
     </EmbeddedResource>

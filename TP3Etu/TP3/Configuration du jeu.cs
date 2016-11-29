@@ -16,6 +16,22 @@ namespace TP3
         {
             InitializeComponent();
         }
+
+        private void ChangerLaTextBoxNbLignes_Scoll(object sender, EventArgs e)
+        {
+            nbLignes_TextBox.Text = nbLignes_TrackBar.Value.ToString();
+        }
+
+        private void InitialiserConfig_Load(object sender, EventArgs e)
+        {
+            nbLignes_TextBox.Text = nbLignes_TrackBar.Value.ToString();
+            nbColones_TextBox.Text = nbColones_TrackBar.Value.ToString();
+        }
+
+        private void ChangerLeNombreDeColones_Scroll(object sender, EventArgs e)
+        {
+            nbColones_TextBox.Text = nbColones_TrackBar.Value.ToString();
+        }
     }
 
 }
