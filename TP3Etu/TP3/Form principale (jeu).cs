@@ -7,6 +7,7 @@ namespace TP3
 {
     public partial class Form1 : Form
     {
+        WindowsMediaPlayer mediaPlayer = new WindowsMediaPlayer();
         #region ConstanteDeJeu
 
         public int nbColonnes = 10;
@@ -100,12 +101,14 @@ namespace TP3
 
         private void personnaliserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Configuration_du_jeu config = new Configuration_du_jeu();
-            config.ShowDialog();
+
         }
 
-        private void CommencerLaPartie_Click(object sender, EventArgs e)
+        private void musiqueDambiacneToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            mediaPlayer.URL = "Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
+            
+            mediaPlayer.controls.play();
         }
 
         #endregion

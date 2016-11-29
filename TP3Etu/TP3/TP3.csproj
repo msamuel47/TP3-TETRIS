@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Movement.cs" />
     <Compile Include="TypeBloc.cs" />
     <Compile Include="Configuration du jeu.cs">
       <SubType>Form</SubType>
@@ -118,6 +117,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
