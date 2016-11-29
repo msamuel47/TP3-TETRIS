@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using WMPLib;
+using System.Threading;
 
 namespace TP3
 {
@@ -140,7 +141,9 @@ namespace TP3
         #endregion
 
         #region Affichage de la table de Jeu
-
+        /// <summary> //Sam V.
+        /// Permet l'affichage du tableau à chaque fois que la méthode est appelée
+        /// </summary>
         private void DessinerTableDeJeu()
         {
             for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
@@ -163,7 +166,7 @@ namespace TP3
 #endregion
 
         #region méthodes d'initialisation
-
+        //Sam v.
         /// <summary>
         /// Initialise la surface de jeu avec les paramètres que le joueur a choisi 
         /// </summary>
@@ -218,10 +221,33 @@ namespace TP3
         }
 
         #endregion
-
+        /// <summary>
+        /// Déclanché par le click du bouton "Commencer" , cette fonction engendre le début d'une partie.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DebuterUnePartie_btnClick(object sender, EventArgs e)
         {
-            DessinerTableDeJeu();
+            //Boucle par Sam V.
+            while (true)
+                {
+                    DessinerTableDeJeu();
+
+                    Thread.Sleep(250);
+                }
+        }
+
+        private void DeplacerJoueur(Deplacement sensDuDeplacement)
+        {
+            
+        }
+
+        private void ToucheApuye_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 'a' || e.KeyChar == (char)Keys.Left)
+                {
+                    
+                }
         }
     }
 }
