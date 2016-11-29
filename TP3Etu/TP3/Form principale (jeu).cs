@@ -13,7 +13,10 @@ namespace TP3
         public int nbColonnes = 10;
         public int nbLignes = 20;
         public TypeBloc[,] tableauDeJeu = null;
-
+        int[] blockActifY = null; // initialisé a la création du bloc //felix
+        int[] blockActifX = null; // "               "           "
+        int ligneCourante = 0;
+        int coloneCourante = 0;
         #endregion
 
         public Form1()
@@ -103,7 +106,13 @@ namespace TP3
         {
 
         }
-
+        //fait par Félix
+        /// <summary>
+        /// la fonction démare le lecteur si il est arreter ou en pause
+        /// et l'arrête si il est en pleine lecture
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void musiqueDambiacneToolStripMenuItem_Click(object sender, EventArgs e)
         {
             mediaPlayer.URL = "art/Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
@@ -133,6 +142,43 @@ namespace TP3
                             tableauDeJeu[i, j] = TypeBloc.NONE;
                         }
                 }
+        }
+        //fait par félix
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sens"></param>
+        /// <returns></returns>
+        bool BlocPeutBouger(Deplacement sens)
+        {
+            bool peutBouger = true;
+            if (sens == Deplacement.DOWN)
+            {
+                for (int i = 0; 0 < blockActifY.Length - 1; i++)
+                {//watch le zéros a la fin
+                    if (tableauDeJeu[blockActifY[i] + ligneCourante, blockActifX[i] + coloneCourante] == TypeBloc.FROZEN || blockActifY[i] + ligneCourante == tableauDeJeu.GetLength(0))
+                    {
+                        peutBouger = false;
+                    }
+                }
+            }
+            else if (sens == Deplacement.RIGHT)
+            {
+
+            }
+            else if (sens == Deplacement.LEFT)
+            {
+
+            }
+            else if(sens == Deplacement.ROTATE_CLOCKWISE)
+            {
+
+            }
+            else if(sens == Deplacement.ROTATE_COUNTERCLOCKWISE)
+            {
+
+            }
+            return peutBouger;
         }
 
         #endregion
