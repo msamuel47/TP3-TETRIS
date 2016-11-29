@@ -9,6 +9,7 @@ namespace TP3
     public Form1( )
     {
       InitializeComponent( );
+
     }
 
     #region Code fourni
@@ -89,7 +90,7 @@ namespace TP3
     }
 
         #endregion
-
+   
         private void personnaliserToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
