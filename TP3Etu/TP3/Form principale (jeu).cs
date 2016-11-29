@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using WMPLib;
+using System.Media;
 namespace TP3
 {
   public partial class Form1 : Form
   {
-#region ConstanteDeJeu
-
-
-
-#endregion
-        public Form1( )
+    public Form1( )
     {
       InitializeComponent( );
 
@@ -32,8 +27,7 @@ namespace TP3
     {
       // Ne pas oublier de mettre en place les valeurs nécessaires à une partie.
       ExecuterTestsUnitaires();
-      InitialiserSurfaceDeJeu(SharedVar.nbLignes,SharedVar.nbColonnes);
-      
+      InitialiserSurfaceDeJeu(20,10);
     }
 
     private void InitialiserSurfaceDeJeu(int nbLignes, int nbCols)
@@ -99,13 +93,12 @@ namespace TP3
    
         private void personnaliserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Configuration_du_jeu config = new Configuration_du_jeu();
-            config.ShowDialog();
+
         }
 
-        private void CommencerLaPartie_Click(object sender, EventArgs e)
+        private void musiqueDambiacneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            MediaPlayer.URL = "";
         }
     }
 
