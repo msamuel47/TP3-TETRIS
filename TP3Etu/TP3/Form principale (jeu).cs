@@ -59,6 +59,7 @@ namespace TP3
         }
       }
     }
+
     #endregion
 
 
@@ -87,9 +88,13 @@ namespace TP3
       // Clean-up
     }
 
-    #endregion
+        #endregion
 
-  }
+        private void personnaliserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 
 
 
