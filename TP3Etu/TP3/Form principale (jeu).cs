@@ -10,8 +10,8 @@ namespace TP3
         WindowsMediaPlayer mediaPlayer = new WindowsMediaPlayer();
         #region ConstanteDeJeu
 
-        public int nbColonnes = 10;
-        public int nbLignes = 20;
+        public  int nbColonnes = 10;
+        public  int nbLignes = 20;
         public TypeBloc[,] tableauDeJeu = null;
         int[] blockActifY = null; // initialisé a la création du bloc //felix
         int[] blockActifX = null; // "               "           "
@@ -39,6 +39,7 @@ namespace TP3
         {
             // Ne pas oublier de mettre en place les valeurs nécessaires à une partie.
             ExecuterTestsUnitaires();
+
             InitialiserSurfaceDeJeu(nbLignes, nbColonnes);
         }
 
@@ -104,7 +105,11 @@ namespace TP3
 
         private void personnaliserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Configuration_du_jeu config = new Configuration_du_jeu();
+            config.ShowDialog();
+            nbColonnes = config.ObtenirDimensionColones();
+            nbLignes = config.ObtenirDimensionLignes();
+            InitialiserSurfaceDeJeu(nbColonnes,nbLignes);
         }
         //fait par Félix
         /// <summary>
@@ -115,15 +120,9 @@ namespace TP3
         /// <param name="e"></param>
         private void musiqueDambiacneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            mediaPlayer.URL = "art/Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
-            if (mediaPlayer.playState == WMPPlayState.wmppsPaused || mediaPlayer.playState == WMPPlayState.wmppsStopped)
-            {
-                mediaPlayer.controls.play();
-            }
-            else if(mediaPlayer.playState == WMPPlayState.wmppsPlaying)
-            {
-                mediaPlayer.controls.stop();
-            }
+            mediaPlayer.URL = "Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
+            
+            mediaPlayer.controls.play();
         }
 
         #endregion
