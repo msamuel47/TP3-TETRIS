@@ -93,6 +93,12 @@ namespace TP3
    
         private void personnaliserToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Configuration_du_jeu config = new Configuration_du_jeu();
+            config.ShowDialog();
+        }
+
+        private void CommencerLaPartie_Click(object sender, EventArgs e)
+        {
 
         }
     }
