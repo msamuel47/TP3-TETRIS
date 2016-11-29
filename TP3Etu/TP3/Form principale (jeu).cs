@@ -107,8 +107,14 @@ namespace TP3
         private void musiqueDambiacneToolStripMenuItem_Click(object sender, EventArgs e)
         {
             mediaPlayer.URL = "art/Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
-            
-            mediaPlayer.controls.play();
+            if (mediaPlayer.playState == WMPPlayState.wmppsPaused || mediaPlayer.playState == WMPPlayState.wmppsStopped)
+            {
+                mediaPlayer.controls.play();
+            }
+            else if(mediaPlayer.playState == WMPPlayState.wmppsPlaying)
+            {
+                mediaPlayer.controls.stop();
+            }
         }
 
         #endregion
