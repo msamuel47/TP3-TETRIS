@@ -101,7 +101,8 @@ namespace TP3
 
         private void personnaliserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Configuration_du_jeu config = new Configuration_du_jeu();
+            config.ShowDialog();
         }
 
         private void musiqueDambiacneToolStripMenuItem_Click(object sender, EventArgs e)
