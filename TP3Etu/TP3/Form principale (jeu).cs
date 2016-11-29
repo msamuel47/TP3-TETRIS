@@ -10,8 +10,8 @@ namespace TP3
         WindowsMediaPlayer mediaPlayer = new WindowsMediaPlayer();
         #region ConstanteDeJeu
 
-        public int nbColonnes = 10;
-        public int nbLignes = 20;
+        public  int nbColonnes = 10;
+        public  int nbLignes = 20;
         public TypeBloc[,] tableauDeJeu = null;
 
         #endregion
@@ -36,6 +36,7 @@ namespace TP3
         {
             // Ne pas oublier de mettre en place les valeurs nécessaires à une partie.
             ExecuterTestsUnitaires();
+
             InitialiserSurfaceDeJeu(nbLignes, nbColonnes);
         }
 
@@ -103,19 +104,16 @@ namespace TP3
         {
             Configuration_du_jeu config = new Configuration_du_jeu();
             config.ShowDialog();
+            nbColonnes = config.ObtenirDimensionColones();
+            nbLignes = config.ObtenirDimensionLignes();
+            InitialiserSurfaceDeJeu(nbColonnes,nbLignes);
         }
 
         private void musiqueDambiacneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            mediaPlayer.URL = "art/Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
-            if (mediaPlayer.playState == WMPPlayState.wmppsPaused || mediaPlayer.playState == WMPPlayState.wmppsStopped)
-            {
-                mediaPlayer.controls.play();
-            }
-            else if(mediaPlayer.playState == WMPPlayState.wmppsPlaying)
-            {
-                mediaPlayer.controls.stop();
-            }
+            mediaPlayer.URL = "Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
+            
+            mediaPlayer.controls.play();
         }
 
         #endregion
