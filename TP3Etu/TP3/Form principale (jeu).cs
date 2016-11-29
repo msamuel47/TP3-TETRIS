@@ -11,6 +11,7 @@ namespace TP3
 
         #region ConstanteDeJeu
 
+
         public int nbColonnes = 10;
         public int nbLignes = 20;
         public TypeBloc[,] tableauDeJeu = null;
@@ -121,7 +122,7 @@ namespace TP3
         /// <param name="e"></param>
         private void musiqueDambiacneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            mediaPlayer.URL = "Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
+            mediaPlayer.URL = "/Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
 
             mediaPlayer.controls.play();
             if (mediaPlayer.playState == WMPPlayState.wmppsPaused || mediaPlayer.playState == WMPPlayState.wmppsStopped)    
