@@ -8,10 +8,12 @@ namespace TP3
     public partial class Form1 : Form
     {
         WindowsMediaPlayer mediaPlayer = new WindowsMediaPlayer();
+
         #region ConstanteDeJeu
 
-        public  int nbColonnes = 10;
-        public  int nbLignes = 20;
+
+        public int nbColonnes = 10;
+        public int nbLignes = 20;
         public TypeBloc[,] tableauDeJeu = null;
         int[] blockActifY = null; // initialisé a la création du bloc //felix
         int[] blockActifX = null; // "               "           "
@@ -109,7 +111,7 @@ namespace TP3
             config.ShowDialog();
             nbColonnes = config.ObtenirDimensionColones();
             nbLignes = config.ObtenirDimensionLignes();
-            InitialiserSurfaceDeJeu(nbColonnes,nbLignes);
+            InitialiserSurfaceDeJeu(nbColonnes, nbLignes);
         }
         //fait par Félix
         /// <summary>
@@ -121,13 +123,24 @@ namespace TP3
         private void musiqueDambiacneToolStripMenuItem_Click(object sender, EventArgs e)
         {
             mediaPlayer.URL = "/Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
-            
+
             mediaPlayer.controls.play();
+            if (mediaPlayer.playState == WMPPlayState.wmppsPaused || mediaPlayer.playState == WMPPlayState.wmppsStopped)    
+                {
+                    mediaPlayer.controls.play();
+                    mediaPlayer.controls.play();
+                }
+            else
+            if (mediaPlayer.playState == WMPPlayState.wmppsPlaying)
+                { // La musique a stop criss
+                    mediaPlayer.controls.stop();
+                }
         }
 
         #endregion
 
         #region méthodes d'initialisation
+
         /// <summary>
         /// Initialise la surface de jeu avec les paramètres que le joueur a choisi 
         /// </summary>
