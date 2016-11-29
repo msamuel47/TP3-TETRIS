@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Media;
+using WMPLib;
+
 namespace TP3
 {
   public partial class Form1 : Form
   {
         #region ConstanteDeJeu
-        public const int nbColonnes = 10;
-        public const int nbLignes = 20;
-
+        public   int nbColonnes = 10;
+        public  int nbLignes = 20;
+      public TypeBloc[,] tableauDeJeu = null;
+         
+         
 
 
         #endregion
@@ -35,6 +38,7 @@ namespace TP3
       // Ne pas oublier de mettre en place les valeurs nécessaires à une partie.
       ExecuterTestsUnitaires();
       InitialiserSurfaceDeJeu(nbLignes,nbColonnes);
+
       
     }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP3
 {
-    enum TypeBloc
+    public enum TypeBloc
     {
         NONE,
         FROZEN,

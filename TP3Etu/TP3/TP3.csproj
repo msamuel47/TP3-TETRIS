@@ -36,6 +36,10 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.WMPLib">
+      <HintPath>obj\Debug\Interop.WMPLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
