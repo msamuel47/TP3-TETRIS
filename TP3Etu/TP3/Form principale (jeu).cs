@@ -10,16 +10,17 @@ namespace TP3
     {
         WindowsMediaPlayer mediaPlayer = new WindowsMediaPlayer();
 
-        #region ConstanteDeJeu
+        #region Variable de jeu
 
 
-        public int nbColonnes = 10;
+        public int nbColones = 10;
         public int nbLignes = 20;
         public TypeBloc[,] tableauDeJeu = null;
         int[] blockActifY = null; // initialisé a la création du bloc //felix
         int[] blockActifX = null; // "               "           "
-        int ligneCourante = 0;
-        int coloneCourante = 0;
+        private int[,] positionJoueur = null;
+       private int ligneCourante = 0;
+         private int coloneCourante = 0;
         #endregion
 
         public Form1()
@@ -43,7 +44,7 @@ namespace TP3
             // Ne pas oublier de mettre en place les valeurs nécessaires à une partie.
             ExecuterTestsUnitaires();
             InitialiserJeu();
-            InitialiserSurfaceDeJeu(nbLignes, nbColonnes);
+            InitialiserSurfaceDeJeu(nbLignes, nbColones);
         }
 
         private void InitialiserSurfaceDeJeu(int nbLignes, int nbCols)
@@ -110,9 +111,9 @@ namespace TP3
         {
             Configuration_du_jeu config = new Configuration_du_jeu();
             config.ShowDialog();
-            nbColonnes = config.ObtenirDimensionColones();
+            nbColones = config.ObtenirDimensionColones();
             nbLignes = config.ObtenirDimensionLignes();
-            InitialiserSurfaceDeJeu(nbColonnes, nbLignes);
+            InitialiserSurfaceDeJeu(nbColones, nbLignes);
         }
         //fait par Félix
         /// <summary>
@@ -150,6 +151,11 @@ namespace TP3
                 {
                     for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
                         {
+                            if (positionJoueur[i, j] == 1) // Si il trouve un objet ...
+                            {
+                        toutesImagesVisuelles[i,j].BackColor = Color.Blue; //Il l'assigne à la couleur bleu et brise la boucle ...
+                                break;
+                            }
                             if (tableauDeJeu[i, j] == TypeBloc.NONE)
                                 {
                                     toutesImagesVisuelles[i, j].BackColor = Color.Black;
@@ -172,15 +178,18 @@ namespace TP3
         /// </summary>
         void InitialiserJeu()
         {
-            tableauDeJeu = new TypeBloc[nbLignes, nbColonnes];
+            positionJoueur = new int[nbLignes, nbColones];
+            tableauDeJeu = new TypeBloc[nbLignes, nbColones];
             for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
                 {
                     for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
-                        {
+                    {
+                        positionJoueur[i, j] = 0;
                             tableauDeJeu[i, j] = TypeBloc.NONE;
                         }
                 }
-            
+            positionJoueur[0, (positionJoueur.GetLength(1)/2) - 1] = 1;
+
         }
         //fait par félix
         /// <summary>
@@ -203,7 +212,7 @@ namespace TP3
             }
             else if (sens == Deplacement.RIGHT)
             {
-
+                for (int i = 0 ;)  //Fait par Sam V.
             }
             else if (sens == Deplacement.LEFT)
             {
@@ -228,12 +237,38 @@ namespace TP3
         /// <param name="e"></param>
         private void DebuterUnePartie_btnClick(object sender, EventArgs e)
         {
+            InitialiserJeu();
+           DessinerTableDeJeu();
            
         }
 
         private void DeplacerJoueur(Deplacement sensDuDeplacement)
         {
-            
+            for (int i = 0; i < positionJoueur.GetLength(0); i++)
+                {
+                    for (int j = 0; j < positionJoueur.GetLength(1); j++)
+                    {
+                        if (positionJoueur[i, j] == 1)
+                        {
+                            if (sensDuDeplacement == Deplacement.LEFT)
+                            {
+                            toutesImagesVisuelles[i,j].BackColor = Color.Black;
+                                positionJoueur[i, j] = 0;
+                                positionJoueur[i, j - 1] = 1;
+                            DessinerTableDeJeu();
+                                break;
+                            }
+                            if (sensDuDeplacement == Deplacement.RIGHT)
+                            {
+                            toutesImagesVisuelles[i, j].BackColor = Color.Black;
+                            positionJoueur[i, j] = 0;
+                            positionJoueur[i, j + 1] = 1;
+                            DessinerTableDeJeu();
+                            break;
+                        }
+                        }
+                    }
+                }
         }
 
         private void ToucheApuye_KeyPress(object sender, KeyPressEventArgs e)
