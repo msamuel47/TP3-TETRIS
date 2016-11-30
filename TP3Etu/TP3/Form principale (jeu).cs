@@ -212,11 +212,29 @@ namespace TP3
             }
             else if (sens == Deplacement.RIGHT)
             {
-                for (int i = 0 ;)  //Fait par Sam V.
+                for (int i = 0; i < positionJoueur.GetLength(0) ; i++)
+                    {
+                        for (int j = 0; j < positionJoueur.GetLength(1); j++)
+                        {
+                            if (positionJoueur[i, positionJoueur.GetLength(1) -1] == 1)
+                            {
+                                peutBouger = false;
+                            }
+                        }
+                    }  //Fait par Sam V.
             }
             else if (sens == Deplacement.LEFT)
             {
-
+                for (int i = 0; i < positionJoueur.GetLength(0); i++)
+                {
+                    for (int j = 0; j < positionJoueur.GetLength(1); j++)
+                    {
+                        if (positionJoueur[i, 0] == 1)
+                        {
+                            peutBouger = false;
+                        }
+                    }
+                }
             }
             else if(sens == Deplacement.ROTATE_CLOCKWISE)
             {
@@ -246,6 +264,10 @@ namespace TP3
         {
             for (int i = 0; i < positionJoueur.GetLength(0); i++)
                 {
+                    if (BlocPeutBouger(sensDuDeplacement) == false)
+                    {
+                        break;
+                    }
                     for (int j = 0; j < positionJoueur.GetLength(1); j++)
                     {
                         if (positionJoueur[i, j] == 1)
