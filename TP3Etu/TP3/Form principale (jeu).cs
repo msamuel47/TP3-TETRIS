@@ -228,13 +228,7 @@ namespace TP3
         /// <param name="e"></param>
         private void DebuterUnePartie_btnClick(object sender, EventArgs e)
         {
-            //Boucle par Sam V.
-            while (true)
-                {
-                    DessinerTableDeJeu();
-
-                    Thread.Sleep(250);
-                }
+           
         }
 
         private void DeplacerJoueur(Deplacement sensDuDeplacement)
@@ -244,9 +238,22 @@ namespace TP3
 
         private void ToucheApuye_KeyPress(object sender, KeyPressEventArgs e)
         {
+            
             if (e.KeyChar == 'a' || e.KeyChar == (char)Keys.Left)
                 {
-                    
+                   DeplacerJoueur(Deplacement.LEFT); 
+                }
+            else if (e.KeyChar == 'd' || e.KeyChar == (char) Keys.Right)
+                {
+                    DeplacerJoueur(Deplacement.RIGHT);
+                }
+            else if (e.KeyChar == 'w' || e.KeyChar == (char) Keys.Up)
+                {
+                    DeplacerJoueur(Deplacement.ROTATE_CLOCKWISE);
+                }
+            else if (e.KeyChar == 's' || e.KeyChar == (char) Keys.Down)
+                {
+                    DeplacerJoueur(Deplacement.ROTATE_COUNTERCLOCKWISE);
                 }
         }
     }
