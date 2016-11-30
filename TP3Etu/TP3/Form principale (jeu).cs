@@ -257,6 +257,7 @@ namespace TP3
         {
             InitialiserJeu();
            DessinerTableDeJeu();
+            timerPourDescenteDuJeu.Start();
            
         }
 
@@ -312,6 +313,11 @@ namespace TP3
                 {
                     DeplacerJoueur(Deplacement.ROTATE_COUNTERCLOCKWISE);
                 }
+        }
+
+        private void FaireDescendreCubeDeJeu_TimerTick(object sender, EventArgs e)
+        {
+            DeplacerJoueur(Deplacement.DOWN);
         }
     }
 }
