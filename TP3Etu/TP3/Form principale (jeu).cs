@@ -124,7 +124,7 @@ namespace TP3
         /// <param name="e"></param>
         private void musiqueDambiacneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            mediaPlayer.URL = "/Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
+            mediaPlayer.URL = "art/Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
 
             mediaPlayer.controls.play();
             if (mediaPlayer.playState == WMPPlayState.wmppsPaused || mediaPlayer.playState == WMPPlayState.wmppsStopped)    
