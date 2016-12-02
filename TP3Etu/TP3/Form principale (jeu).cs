@@ -18,9 +18,11 @@ namespace TP3
         public TypeBloc[,] tableauDeJeu = null;
         int[] blocActifY = null; // initialisé a la création du bloc //felix
         int[] blocActifX = null; // "               "           "
-        private int[,] positionJoueur = null;
-       private int ligneCourante = 0;
-         private int coloneCourante = 0;
+        int[,] positionJoueur = null;
+        int ligneCourante = 0;
+        int coloneCourante = 0;
+        Random rnd = new Random();
+       
         #endregion
 
         public Form1()
@@ -147,29 +149,29 @@ namespace TP3
         /// </summary>
         private void DessinerTableDeJeu()
         {
+            //pierre
             for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
+            {
+                for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
                 {
-                    for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
-                        {
-                            if (positionJoueur[i, j] == 1) // Si il trouve un objet ...
-                            {
-                        toutesImagesVisuelles[i,j].BackColor = Color.Blue; //Il l'assigne à la couleur bleu et brise la boucle ...
-                                break;
-                            }
-                            if (tableauDeJeu[i, j] == TypeBloc.NONE)
-                                {
-                                    toutesImagesVisuelles[i, j].BackColor = Color.Black;
-                                }
-                            if (tableauDeJeu[i, j] == TypeBloc.FROZEN)
-                                {
-                                    toutesImagesVisuelles[i, j].BackColor = Color.Gray;
-                                }
-                        }
+                    if (tableauDeJeu[i, j] == TypeBloc.FROZEN) // Si il trouve un objet ...
+                    {
+                        toutesImagesVisuelles[i, j].BackColor = Color.Gray;
+                    }
+                    else
+                        toutesImagesVisuelles[i, j].BackColor = Color.Black;
                 }
-        }
-       
+            }
 
-#endregion
+            for (int i = 0; i < 4; i++)
+            {
+                toutesImagesVisuelles[ligneCourante + blockActifY[i], coloneCourante + blockActifX[i]].BackColor = Color.Blue;
+            }
+              
+        }
+
+
+        #endregion
 
         #region méthodes d'initialisation
         //Sam v.
@@ -180,8 +182,8 @@ namespace TP3
         {
             positionJoueur = new int[nbLignes, nbColones];
             tableauDeJeu = new TypeBloc[nbLignes, nbColones];
-            blocActifX = new int[4];
-            blocActifY = new int[4];
+            blockActifX = new int[4];
+            blockActifY = new int[4];
             for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
                 {
                     for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
@@ -190,7 +192,8 @@ namespace TP3
                             tableauDeJeu[i, j] = TypeBloc.NONE;
                         }
                 }
-            positionJoueur[0, (positionJoueur.GetLength(1)/2) - 1] = 1;
+          
+      
 
         }
         //fait par félix
@@ -204,38 +207,40 @@ namespace TP3
             bool peutBouger = true;
             if (sens == Deplacement.DOWN)
             {
-                for (int i = 0; 0 < blocActifY.Length - 1; i++)
+                for (int i = 0; i < blockActifY.Length -1; i++)
                 {//watch le zéros a la fin
-                    if (tableauDeJeu[blocActifY[i] + ligneCourante, blocActifX[i] + coloneCourante] == TypeBloc.FROZEN || blocActifY[i] + ligneCourante == tableauDeJeu.GetLength(0))
+                    if (positionJoueur[blockActifY[i] + ligneCourante, blockActifX[i] + coloneCourante] == 2 || blockActifY[i] + ligneCourante == positionJoueur.GetLength(0)-1)
                     {
                         peutBouger = false;
+                        for (int j = 0; j < blockActifY.Length - 1; j++)
+                        {
+                            tableauDeJeu[blockActifY[i] + ligneCourante, blockActifX[i] + coloneCourante] = TypeBloc.FROZEN;
+                        }
+                        GenererBlock();
                     }
                 }
             }
             else if (sens == Deplacement.RIGHT)
             {
-                for (int i = 0; i < positionJoueur.GetLength(0) ; i++)
+                for (int i = 0; i < blockActifX.Length ; i++)
                     {
-                        for (int j = 0; j < positionJoueur.GetLength(1); j++)
-                        {
-                            if (positionJoueur[i, positionJoueur.GetLength(1) -1] == 1)
+                        
+                            if (positionJoueur[ligneCourante + blockActifY[i],coloneCourante + blockActifX[i]] == 2 || coloneCourante + blockActifX[i] ==positionJoueur.GetLength(1)-1)
                             {
                                 peutBouger = false;
                             }
-                        }
-                    }  //Fait par Sam V.
+                        
+                    }  
             }
             else if (sens == Deplacement.LEFT)
             {
-                for (int i = 0; i < positionJoueur.GetLength(0); i++)
+                for (int i = 0; i < blockActifX.GetLength(0); i++)
                 {
-                    for (int j = 0; j < positionJoueur.GetLength(1); j++)
+                    if (positionJoueur[ligneCourante + blockActifY[i], coloneCourante + blockActifX[i] ] == 2 || coloneCourante + blockActifX[i] == 0)
                     {
-                        if (positionJoueur[i, 0] == 1)
-                        {
-                            peutBouger = false;
-                        }
+                        peutBouger = false;
                     }
+
                 }
             }
             else if(sens == Deplacement.ROTATE_CLOCKWISE)
@@ -250,6 +255,7 @@ namespace TP3
         }
 
         #endregion
+        //sam +felix
         /// <summary>
         /// Déclanché par le click du bouton "Commencer" , cette fonction engendre le début d'une partie.
         /// </summary>
@@ -258,44 +264,58 @@ namespace TP3
         private void DebuterUnePartie_btnClick(object sender, EventArgs e)
         {
             InitialiserJeu();
+            GenererBlock();
            DessinerTableDeJeu();
             timerPourDescenteDuJeu.Start();
            
         }
-
+        //felix
+        /// <summary>
+        /// la fonction modifie les coordoné du "point principale" a partir du quel le reste du bloque est affiché
+        /// </summary>
+        /// <param name="sensDuDeplacement">direction dans le quel va se deplacer le bloque ou tourné</param>
         private void DeplacerJoueur(Deplacement sensDuDeplacement)
         {
-            for (int i = 0; i < positionJoueur.GetLength(0); i++)
+        
+            int memoire = 0;
+            if (BlocPeutBouger(sensDuDeplacement) == true)
+              {
+                if(sensDuDeplacement == Deplacement.DOWN)
                 {
-                    if (BlocPeutBouger(sensDuDeplacement) == false)
+                    ligneCourante += 1;
+                }
+                else if (sensDuDeplacement ==Deplacement.LEFT)
+                {
+                    coloneCourante -= 1;
+                }
+                else if (sensDuDeplacement ==Deplacement.RIGHT)
+                {
+                    coloneCourante += 1;
+                }
+                else if (sensDuDeplacement ==Deplacement.ROTATE_CLOCKWISE)
+                {
+                    
+                }
+                else if (sensDuDeplacement ==Deplacement.ROTATE_COUNTERCLOCKWISE)
+                {
+                    for (int i = 0; i < blockActifX.Length; i++)
                     {
-                        break;
-                    }
-                    for (int j = 0; j < positionJoueur.GetLength(1); j++)
-                    {
-                        if (positionJoueur[i, j] == 1)
+                        memoire = blockActifX[i];
+                        blockActifX[i] = blockActifY[i];
+                        blockActifY[i] = memoire;
+                        if (blockActifY[i] != 0)
                         {
-                            if (sensDuDeplacement == Deplacement.LEFT)
-                            {
-                            toutesImagesVisuelles[i,j].BackColor = Color.Black;
-                                positionJoueur[i, j] = 0;
-                                positionJoueur[i, j - 1] = 1;
-                            DessinerTableDeJeu();
-                                break;
-                            }
-                            if (sensDuDeplacement == Deplacement.RIGHT)
-                            {
-                            toutesImagesVisuelles[i, j].BackColor = Color.Black;
-                            positionJoueur[i, j] = 0;
-                            positionJoueur[i, j + 1] = 1;
-                            DessinerTableDeJeu();
-                            break;
-                        }
+                            blockActifY[i] = blockActifY[i] * -1;
                         }
                     }
                 }
+                DessinerTableDeJeu();
+            
+            }
+                 
+     
         }
-
+        //sam
         private void ToucheApuye_KeyPress(object sender, KeyPressEventArgs e)
         {
             
@@ -315,11 +335,160 @@ namespace TP3
                 {
                     DeplacerJoueur(Deplacement.ROTATE_COUNTERCLOCKWISE);
                 }
+         
         }
-
+        //sam
         private void FaireDescendreCubeDeJeu_TimerTick(object sender, EventArgs e)
         {
             DeplacerJoueur(Deplacement.DOWN);
+        }
+        //felix.b
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ligneCourante"></param>
+        /// <param name="coloneCourant"></param>
+        /// <param name="formeDuBloc"></param>
+        void GenererBlock()
+        {
+            coloneCourante = 0;
+            ligneCourante = 0;
+            TypeBloc formeDuBloc = TypeBloc.SQUARE;
+            int typeDeBloc = rnd.Next(0, 7 + 1);
+            if (typeDeBloc == 0)
+            {
+                formeDuBloc = TypeBloc.J;
+            }
+            else if (typeDeBloc ==1)
+            {
+                formeDuBloc = TypeBloc.L;
+            }
+            else if (typeDeBloc ==2)
+            {
+                formeDuBloc = TypeBloc.LINE;
+            }
+            else if (typeDeBloc ==3)
+            {
+                formeDuBloc = TypeBloc.Z;
+            }
+            else if (typeDeBloc ==4)
+            {
+                formeDuBloc = TypeBloc.S;
+            }
+            else if (typeDeBloc ==5)
+            {
+                formeDuBloc = TypeBloc.SQUARE;
+            }
+            else if (typeDeBloc ==6)
+            {
+                formeDuBloc = TypeBloc.T;
+            }
+       
+            if (formeDuBloc == TypeBloc.J)
+            {
+             
+                blockActifX[0] =1;
+                blockActifY[0] =0;
+
+                blockActifX[1] =1;
+                blockActifY[1] =1;
+
+                blockActifX[2] =1;
+                blockActifY[2] =2;
+
+                blockActifX[3] =0;
+                blockActifY[3] =2;
+            }
+            else if (formeDuBloc == TypeBloc.L)
+            {
+                blockActifX[0] =0;
+                blockActifY[0] =0;
+
+                blockActifX[1] =0;
+                blockActifY[1] =1;
+
+                blockActifX[2] =0;
+                blockActifY[2] =2;
+
+                blockActifX[3] =1;
+                blockActifY[3] =2;
+
+            }
+            else if (formeDuBloc == TypeBloc.LINE)//La ligne est coucher
+            {
+                blockActifX[0] =0;
+                blockActifY[0] =0;
+
+                blockActifX[1] =1;
+                blockActifY[1] =0;
+
+                blockActifX[2] =2;
+                blockActifY[2] =0;
+
+                blockActifX[3] =3;
+                blockActifY[3] =0;
+            }
+            else if (formeDuBloc == TypeBloc.S)
+            {
+                blockActifX[0] =2;
+                blockActifY[0] =0;
+
+                blockActifX[1] =1;
+                blockActifY[1] =0;
+
+                blockActifX[2] =1;
+                blockActifY[2] =1;
+
+                blockActifX[3] =0;
+                blockActifY[3] =1;
+            }
+            else if (formeDuBloc == TypeBloc.SQUARE)
+            {
+                blockActifX[0] =0;
+                blockActifY[0] =0;
+
+                blockActifX[1] =1;
+                blockActifY[1] =0;
+
+                blockActifX[2] =0;
+                blockActifY[2] =1;
+
+                blockActifX[3] =1;
+                blockActifY[3] =1;
+            }
+            else if (formeDuBloc == TypeBloc.T)
+            {
+                blockActifX[0] =0;
+                blockActifY[0] =0;
+
+                blockActifX[1] =1;
+                blockActifY[1] =0;
+
+                blockActifX[2] =2;
+                blockActifY[2] =0;
+
+                blockActifX[3] =1;
+                blockActifY[3] =1;
+            }
+            else if (formeDuBloc == TypeBloc.Z)
+            {
+                blockActifX[0] =0;
+                blockActifY[0] =0;
+
+                blockActifX[1] =1;
+                blockActifY[1] =0;
+
+                blockActifX[2] =1;
+                blockActifY[2] =1;
+
+                blockActifX[3] =2;
+                blockActifY[3] =1;
+            }
+            for(int i =0;i<blockActifX.Length;i++)
+            {
+                positionJoueur[ligneCourante + blockActifY[i], coloneCourante + blockActifX[i]] = 1;
+            }
+
         }
     }
 }
