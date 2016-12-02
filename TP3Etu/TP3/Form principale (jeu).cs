@@ -149,25 +149,51 @@ namespace TP3
         /// </summary>
         private void DessinerTableDeJeu()
         {
+
             for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
+            {
+                for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
                 {
-                    for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
-                        {
-                            if (positionJoueur[i, j] == 1) // Si il trouve un objet ...
-                            {
-                        toutesImagesVisuelles[i,j].BackColor = Color.Blue; //Il l'assigne à la couleur bleu et brise la boucle ...
-                                break;
-                            }
-                            if (tableauDeJeu[i, j] == TypeBloc.NONE)
-                                {
-                                    toutesImagesVisuelles[i, j].BackColor = Color.Black;
-                                }
-                            if (tableauDeJeu[i, j] == TypeBloc.FROZEN)
-                                {
-                                    toutesImagesVisuelles[i, j].BackColor = Color.Gray;
-                                }
-                        }
+                    if (tableauDeJeu[i, j] == TypeBloc.FROZEN) // Si il trouve un objet ...
+                    {
+                        toutesImagesVisuelles[i, j].BackColor = Color.Gray;
+                    }
+                    else
+                        toutesImagesVisuelles[i, j].BackColor = Color.Black;
                 }
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                toutesImagesVisuelles[ligneCourante + blockActifY[i], coloneCourante + blockActifX[i]].BackColor = Color.Blue;
+            }
+                //        for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
+                //{
+                //    for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
+                //        {
+                //            if (positionJoueur[i, j] == 1) // Si il trouve un objet ...
+                //            {
+                //        toutesImagesVisuelles[i,j].BackColor = Color.Blue;
+                //        break;
+                //            }
+                //            if (positionJoueur[i, j] == 0)
+                //                {
+                //                    toutesImagesVisuelles[i, j].BackColor = Color.Black;
+                //                }
+                //            if (positionJoueur[i, j] == 2)
+                //                {
+                //                    toutesImagesVisuelles[i, j].BackColor = Color.Gray;
+                //                }
+                //  //  if (tableauDeJeu[i, j] == TypeBloc.NONE)
+                //    //{
+                //      //  toutesImagesVisuelles[i, j].BackColor = Color.Black;
+                //    //}
+                //    //if (tableauDeJeu[i, j] == TypeBloc.FROZEN)
+                //    //{
+                //     //   toutesImagesVisuelles[i, j].BackColor = Color.Gray;
+                //    //}
+                //}
+                //}
         }
 
 
