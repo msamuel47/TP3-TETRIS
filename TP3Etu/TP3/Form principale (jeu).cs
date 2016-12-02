@@ -320,7 +320,7 @@ namespace TP3
         private void ToucheApuye_KeyPress(object sender, KeyPressEventArgs e)
         {
             
-            if (e.KeyChar == 'a' || e.KeyChar == (char)Keys.Left)
+            if (e.KeyChar == 'a' )
                 {
                    DeplacerJoueur(Deplacement.LEFT); 
                 }
