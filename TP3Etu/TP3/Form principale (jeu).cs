@@ -20,7 +20,9 @@ namespace TP3
         int[] blockActifX = null; // "               "           "
         int[,] positionJoueur = null;
         int ligneCourante = 0;
-         int coloneCourante = 0;
+        int coloneCourante = 0;
+        Random rnd = new Random();
+       
         #endregion
 
         public Form1()
@@ -190,7 +192,7 @@ namespace TP3
                             tableauDeJeu[i, j] = TypeBloc.NONE;
                         }
                 }
-            positionJoueur[0, (positionJoueur.GetLength(1)/2) - 1] = 1;
+          
       
 
         }
@@ -205,9 +207,9 @@ namespace TP3
             bool peutBouger = true;
             if (sens == Deplacement.DOWN)
             {
-                for (int i = 0; 0 < blockActifY.Length - 1; i++)
+                for (int i = 0; i < blockActifY.Length -1; i++)
                 {//watch le zéros a la fin
-                    if (tableauDeJeu[blockActifY[i] + ligneCourante, blockActifX[i] + coloneCourante] == TypeBloc.FROZEN || blockActifY[i] + ligneCourante == tableauDeJeu.GetLength(0))
+                    if (positionJoueur[blockActifY[i] + ligneCourante, blockActifX[i] + coloneCourante] == 2 || blockActifY[i] + ligneCourante == positionJoueur.GetLength(0))
                     {
                         peutBouger = false;
                     }
@@ -215,28 +217,25 @@ namespace TP3
             }
             else if (sens == Deplacement.RIGHT)
             {
-                for (int i = 0; i < positionJoueur.GetLength(0) ; i++)
+                for (int i = 0; i < blockActifX.Length ; i++)
                     {
-                        for (int j = 0; j < positionJoueur.GetLength(1); j++)
-                        {
-                            if (positionJoueur[i, positionJoueur.GetLength(1) -1] == 1)
+                        
+                            if (positionJoueur[ligneCourante + blockActifY[i],coloneCourante + blockActifX[i]+1] == 2 || coloneCourante + blockActifX[i] ==positionJoueur.GetLength(1))
                             {
                                 peutBouger = false;
                             }
-                        }
-                    }  //Fait par Sam V. /// condamner la zone sa chie
+                        
+                    }  
             }
             else if (sens == Deplacement.LEFT)
             {
                 for (int i = 0; i < positionJoueur.GetLength(0); i++)
                 {
-                    for (int j = 0; j < positionJoueur.GetLength(1); j++)
+                    if (positionJoueur[ligneCourante + blockActifY[i], coloneCourante + blockActifX[i] -1] == 2 || coloneCourante + blockActifX[i] == 0)
                     {
-                        if (positionJoueur[i, 0] == 1)
-                        {
-                            peutBouger = false;
-                        }
+                        peutBouger = false;
                     }
+
                 }
             }
             else if(sens == Deplacement.ROTATE_CLOCKWISE)
@@ -259,6 +258,7 @@ namespace TP3
         private void DebuterUnePartie_btnClick(object sender, EventArgs e)
         {
             InitialiserJeu();
+            GenererBlock();
            DessinerTableDeJeu();
             timerPourDescenteDuJeu.Start();
            
@@ -329,8 +329,39 @@ namespace TP3
         /// <param name="ligneCourante"></param>
         /// <param name="coloneCourant"></param>
         /// <param name="formeDuBloc"></param>
-        void GenererBlock(TypeBloc formeDuBloc)
+        void GenererBlock()
         {
+            TypeBloc formeDuBloc = TypeBloc.SQUARE;
+            int typeDeBloc = rnd.Next(0, 7 + 1);
+            if (typeDeBloc == 0)
+            {
+                formeDuBloc = TypeBloc.J;
+            }
+            else if (typeDeBloc ==1)
+            {
+                formeDuBloc = TypeBloc.L;
+            }
+            else if (typeDeBloc ==2)
+            {
+                formeDuBloc = TypeBloc.LINE;
+            }
+            else if (typeDeBloc ==3)
+            {
+                formeDuBloc = TypeBloc.Z;
+            }
+            else if (typeDeBloc ==4)
+            {
+                formeDuBloc = TypeBloc.S;
+            }
+            else if (typeDeBloc ==5)
+            {
+                formeDuBloc = TypeBloc.SQUARE;
+            }
+            else if (typeDeBloc ==6)
+            {
+                formeDuBloc = TypeBloc.T;
+            }
+       
             if (formeDuBloc == TypeBloc.J)
             {
              
