@@ -16,8 +16,8 @@ namespace TP3
         public int nbColones = 10;
         public int nbLignes = 20;
         public TypeBloc[,] tableauDeJeu = null;
-        int[] blockActifY = null; // initialisé a la création du bloc //felix
-        int[] blockActifX = null; // "               "           "
+        int[] blocActifY = null; // initialisé a la création du bloc //felix
+        int[] blocActifX = null; // "               "           "
         private int[,] positionJoueur = null;
        private int ligneCourante = 0;
          private int coloneCourante = 0;
@@ -180,6 +180,8 @@ namespace TP3
         {
             positionJoueur = new int[nbLignes, nbColones];
             tableauDeJeu = new TypeBloc[nbLignes, nbColones];
+            blocActifX = new int[4];
+            blocActifY = new int[4];
             for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
                 {
                     for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
@@ -202,9 +204,9 @@ namespace TP3
             bool peutBouger = true;
             if (sens == Deplacement.DOWN)
             {
-                for (int i = 0; 0 < blockActifY.Length - 1; i++)
+                for (int i = 0; 0 < blocActifY.Length - 1; i++)
                 {//watch le zéros a la fin
-                    if (tableauDeJeu[blockActifY[i] + ligneCourante, blockActifX[i] + coloneCourante] == TypeBloc.FROZEN || blockActifY[i] + ligneCourante == tableauDeJeu.GetLength(0))
+                    if (tableauDeJeu[blocActifY[i] + ligneCourante, blocActifX[i] + coloneCourante] == TypeBloc.FROZEN || blocActifY[i] + ligneCourante == tableauDeJeu.GetLength(0))
                     {
                         peutBouger = false;
                     }
