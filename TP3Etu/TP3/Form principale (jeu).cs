@@ -209,9 +209,14 @@ namespace TP3
             {
                 for (int i = 0; i < blockActifY.Length -1; i++)
                 {//watch le zéros a la fin
-                    if (positionJoueur[blockActifY[i] + ligneCourante, blockActifX[i] + coloneCourante] == 2 || blockActifY[i] + ligneCourante == positionJoueur.GetLength(0))
+                    if (positionJoueur[blockActifY[i] + ligneCourante, blockActifX[i] + coloneCourante] == 2 || blockActifY[i] + ligneCourante == positionJoueur.GetLength(0)-1)
                     {
                         peutBouger = false;
+                        for (int j = 0; j < blockActifY.Length - 1; j++)
+                        {
+                            tableauDeJeu[blockActifY[i] + ligneCourante, blockActifX[i] + coloneCourante] = TypeBloc.FROZEN;
+                        }
+                        GenererBlock();
                     }
                 }
             }
@@ -220,7 +225,7 @@ namespace TP3
                 for (int i = 0; i < blockActifX.Length ; i++)
                     {
                         
-                            if (positionJoueur[ligneCourante + blockActifY[i],coloneCourante + blockActifX[i]+1] == 2 || coloneCourante + blockActifX[i] ==positionJoueur.GetLength(1))
+                            if (positionJoueur[ligneCourante + blockActifY[i],coloneCourante + blockActifX[i]] == 2 || coloneCourante + blockActifX[i] ==positionJoueur.GetLength(1)-1)
                             {
                                 peutBouger = false;
                             }
@@ -250,6 +255,7 @@ namespace TP3
         }
 
         #endregion
+        //sam +felix
         /// <summary>
         /// Déclanché par le click du bouton "Commencer" , cette fonction engendre le début d'une partie.
         /// </summary>
@@ -263,11 +269,14 @@ namespace TP3
             timerPourDescenteDuJeu.Start();
            
         }
-
+        //felix
+        /// <summary>
+        /// la fonction modifie les coordoné du "point principale" a partir du quel le reste du bloque est affiché
+        /// </summary>
+        /// <param name="sensDuDeplacement">direction dans le quel va se deplacer le bloque ou tourné</param>
         private void DeplacerJoueur(Deplacement sensDuDeplacement)
         {
-            //  for (int i = 0; i < positionJoueur.GetLength(0); i++)
-            //   {
+        
             int memoire = 0;
             if (BlocPeutBouger(sensDuDeplacement) == true)
               {
@@ -294,38 +303,19 @@ namespace TP3
                         memoire = blockActifX[i];
                         blockActifX[i] = blockActifY[i];
                         blockActifY[i] = memoire;
+                        if (blockActifY[i] != 0)
+                        {
+                            blockActifY[i] = blockActifY[i] * -1;
+                        }
                     }
                 }
                 DessinerTableDeJeu();
             
             }
                  
-                    
-                    //  for (int j = 0; j < positionJoueur.GetLength(1); j++)
-                    //{
-                      //  if (positionJoueur[i, j] == 1)
-                        //{
-                          //  if (sensDuDeplacement == Deplacement.LEFT)
-                            //{
-                            //toutesImagesVisuelles[i,j].BackColor = Color.Black;
-                              //  positionJoueur[i, j] = 0;
-                                //positionJoueur[i, j - 1] = 1;
-                            //DessinerTableDeJeu();
-                              //  break;
-                            //}
-                            //if (sensDuDeplacement == Deplacement.RIGHT)
-                            //{
-                            //toutesImagesVisuelles[i, j].BackColor = Color.Black;
-                            //positionJoueur[i, j] = 0;
-                            //positionJoueur[i, j + 1] = 1;
-                            //DessinerTableDeJeu();
-                            //break;
-                      //  }
-                     //   }
-                   // }
-              //  }
+     
         }
-
+        //sam
         private void ToucheApuye_KeyPress(object sender, KeyPressEventArgs e)
         {
             
@@ -347,7 +337,7 @@ namespace TP3
                 }
          
         }
-
+        //sam
         private void FaireDescendreCubeDeJeu_TimerTick(object sender, EventArgs e)
         {
             DeplacerJoueur(Deplacement.DOWN);
@@ -361,6 +351,8 @@ namespace TP3
         /// <param name="formeDuBloc"></param>
         void GenererBlock()
         {
+            coloneCourante = 0;
+            ligneCourante = 0;
             TypeBloc formeDuBloc = TypeBloc.SQUARE;
             int typeDeBloc = rnd.Next(0, 7 + 1);
             if (typeDeBloc == 0)
