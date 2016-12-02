@@ -149,7 +149,7 @@ namespace TP3
         /// </summary>
         private void DessinerTableDeJeu()
         {
-
+            //pierre
             for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
             {
                 for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
@@ -167,33 +167,7 @@ namespace TP3
             {
                 toutesImagesVisuelles[ligneCourante + blockActifY[i], coloneCourante + blockActifX[i]].BackColor = Color.Blue;
             }
-                //        for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
-                //{
-                //    for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
-                //        {
-                //            if (positionJoueur[i, j] == 1) // Si il trouve un objet ...
-                //            {
-                //        toutesImagesVisuelles[i,j].BackColor = Color.Blue;
-                //        break;
-                //            }
-                //            if (positionJoueur[i, j] == 0)
-                //                {
-                //                    toutesImagesVisuelles[i, j].BackColor = Color.Black;
-                //                }
-                //            if (positionJoueur[i, j] == 2)
-                //                {
-                //                    toutesImagesVisuelles[i, j].BackColor = Color.Gray;
-                //                }
-                //  //  if (tableauDeJeu[i, j] == TypeBloc.NONE)
-                //    //{
-                //      //  toutesImagesVisuelles[i, j].BackColor = Color.Black;
-                //    //}
-                //    //if (tableauDeJeu[i, j] == TypeBloc.FROZEN)
-                //    //{
-                //     //   toutesImagesVisuelles[i, j].BackColor = Color.Gray;
-                //    //}
-                //}
-                //}
+              
         }
 
 
@@ -255,9 +229,9 @@ namespace TP3
             }
             else if (sens == Deplacement.LEFT)
             {
-                for (int i = 0; i < positionJoueur.GetLength(0); i++)
+                for (int i = 0; i < blockActifX.GetLength(0); i++)
                 {
-                    if (positionJoueur[ligneCourante + blockActifY[i], coloneCourante + blockActifX[i] -1] == 2 || coloneCourante + blockActifX[i] == 0)
+                    if (positionJoueur[ligneCourante + blockActifY[i], coloneCourante + blockActifX[i] ] == 2 || coloneCourante + blockActifX[i] == 0)
                     {
                         peutBouger = false;
                     }
@@ -292,32 +266,54 @@ namespace TP3
 
         private void DeplacerJoueur(Deplacement sensDuDeplacement)
         {
-            for (int i = 0; i < positionJoueur.GetLength(0); i++)
+          //  for (int i = 0; i < positionJoueur.GetLength(0); i++)
+             //   {
+             if (BlocPeutBouger(sensDuDeplacement) == true)
+              {
+                if(sensDuDeplacement == Deplacement.DOWN)
                 {
-                    if (BlocPeutBouger(sensDuDeplacement) == false)
-                    {
-                        break;
-                    }
-                    for (int j = 0; j < positionJoueur.GetLength(1); j++)
-                    {
-                        if (positionJoueur[i, j] == 1)
-                        {
-                            if (sensDuDeplacement == Deplacement.LEFT)
-                            {
-                            toutesImagesVisuelles[i,j].BackColor = Color.Black;
-                                positionJoueur[i, j] = 0;
-                                positionJoueur[i, j - 1] = 1;
-                            DessinerTableDeJeu();
-                                break;
-                            }
-                            if (sensDuDeplacement == Deplacement.RIGHT)
-                            {
-                            toutesImagesVisuelles[i, j].BackColor = Color.Black;
-                            positionJoueur[i, j] = 0;
-                            positionJoueur[i, j + 1] = 1;
-                            DessinerTableDeJeu();
-                            break;
-                        }
+                    ligneCourante += 1;
+                }
+                else if (sensDuDeplacement ==Deplacement.LEFT)
+                {
+                    coloneCourante -= 1;
+                }
+                else if (sensDuDeplacement ==Deplacement.RIGHT)
+                {
+                    coloneCourante += 1;
+                }
+                else if (sensDuDeplacement ==Deplacement.ROTATE_CLOCKWISE)
+                {
+                    
+                }
+                else if (sensDuDeplacement ==Deplacement.ROTATE_COUNTERCLOCKWISE)
+                {
+
+                }
+            
+            }
+                 
+                    
+                    //  for (int j = 0; j < positionJoueur.GetLength(1); j++)
+                    //{
+                      //  if (positionJoueur[i, j] == 1)
+                        //{
+                          //  if (sensDuDeplacement == Deplacement.LEFT)
+                            //{
+                            //toutesImagesVisuelles[i,j].BackColor = Color.Black;
+                              //  positionJoueur[i, j] = 0;
+                                //positionJoueur[i, j - 1] = 1;
+                            //DessinerTableDeJeu();
+                              //  break;
+                            //}
+                            //if (sensDuDeplacement == Deplacement.RIGHT)
+                            //{
+                            //toutesImagesVisuelles[i, j].BackColor = Color.Black;
+                            //positionJoueur[i, j] = 0;
+                            //positionJoueur[i, j + 1] = 1;
+                            //DessinerTableDeJeu();
+                            //break;
+                      //  }
                         }
                     }
                 }
@@ -342,6 +338,7 @@ namespace TP3
                 {
                     DeplacerJoueur(Deplacement.ROTATE_COUNTERCLOCKWISE);
                 }
+         
         }
 
         private void FaireDescendreCubeDeJeu_TimerTick(object sender, EventArgs e)

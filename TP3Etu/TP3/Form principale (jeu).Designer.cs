@@ -176,6 +176,7 @@
             // 
             // timerPourDescenteDuJeu
             // 
+            this.timerPourDescenteDuJeu.Enabled = true;
             this.timerPourDescenteDuJeu.Interval = 1000;
             this.timerPourDescenteDuJeu.Tick += new System.EventHandler(this.FaireDescendreCubeDeJeu_TimerTick);
             // 
