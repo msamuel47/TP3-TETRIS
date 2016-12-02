@@ -266,9 +266,10 @@ namespace TP3
 
         private void DeplacerJoueur(Deplacement sensDuDeplacement)
         {
-          //  for (int i = 0; i < positionJoueur.GetLength(0); i++)
-             //   {
-             if (BlocPeutBouger(sensDuDeplacement) == true)
+            //  for (int i = 0; i < positionJoueur.GetLength(0); i++)
+            //   {
+            int memoire = 0;
+            if (BlocPeutBouger(sensDuDeplacement) == true)
               {
                 if(sensDuDeplacement == Deplacement.DOWN)
                 {
@@ -288,8 +289,14 @@ namespace TP3
                 }
                 else if (sensDuDeplacement ==Deplacement.ROTATE_COUNTERCLOCKWISE)
                 {
-
+                    for (int i = 0; i < blockActifX.Length; i++)
+                    {
+                        memoire = blockActifX[i];
+                        blockActifX[i] = blockActifY[i];
+                        blockActifY[i] = memoire;
+                    }
                 }
+                DessinerTableDeJeu();
             
             }
                  
@@ -314,9 +321,9 @@ namespace TP3
                             //DessinerTableDeJeu();
                             //break;
                       //  }
-                        }
-                    }
-                }
+                     //   }
+                   // }
+              //  }
         }
 
         private void ToucheApuye_KeyPress(object sender, KeyPressEventArgs e)
