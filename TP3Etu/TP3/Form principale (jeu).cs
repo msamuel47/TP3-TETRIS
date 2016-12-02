@@ -18,9 +18,9 @@ namespace TP3
         public TypeBloc[,] tableauDeJeu = null;
         int[] blockActifY = null; // initialisé a la création du bloc //felix
         int[] blockActifX = null; // "               "           "
-        private int[,] positionJoueur = null;
-       private int ligneCourante = 0;
-         private int coloneCourante = 0;
+        int[,] positionJoueur = null;
+        int ligneCourante = 0;
+         int coloneCourante = 0;
         #endregion
 
         public Form1()
@@ -167,9 +167,9 @@ namespace TP3
                         }
                 }
         }
-       
 
-#endregion
+
+        #endregion
 
         #region méthodes d'initialisation
         //Sam v.
@@ -180,6 +180,8 @@ namespace TP3
         {
             positionJoueur = new int[nbLignes, nbColones];
             tableauDeJeu = new TypeBloc[nbLignes, nbColones];
+            blockActifX = new int[4];
+            blockActifY = new int[4];
             for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
                 {
                     for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
@@ -189,6 +191,7 @@ namespace TP3
                         }
                 }
             positionJoueur[0, (positionJoueur.GetLength(1)/2) - 1] = 1;
+      
 
         }
         //fait par félix
@@ -221,7 +224,7 @@ namespace TP3
                                 peutBouger = false;
                             }
                         }
-                    }  //Fait par Sam V.
+                    }  //Fait par Sam V. /// condamner la zone sa chie
             }
             else if (sens == Deplacement.LEFT)
             {
@@ -318,6 +321,121 @@ namespace TP3
         private void FaireDescendreCubeDeJeu_TimerTick(object sender, EventArgs e)
         {
             DeplacerJoueur(Deplacement.DOWN);
+        }
+        //felix.b
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ligneCourante"></param>
+        /// <param name="coloneCourant"></param>
+        /// <param name="formeDuBloc"></param>
+        void GenererBlock(TypeBloc formeDuBloc)
+        {
+            if (formeDuBloc == TypeBloc.J)
+            {
+             
+                blockActifX[0] =1;
+                blockActifY[0] =0;
+
+                blockActifX[1] =1;
+                blockActifY[1] =1;
+
+                blockActifX[2] =1;
+                blockActifY[2] =2;
+
+                blockActifX[3] =0;
+                blockActifY[3] =2;
+            }
+            else if (formeDuBloc == TypeBloc.L)
+            {
+                blockActifX[0] =0;
+                blockActifY[0] =0;
+
+                blockActifX[1] =0;
+                blockActifY[1] =1;
+
+                blockActifX[2] =0;
+                blockActifY[2] =2;
+
+                blockActifX[3] =1;
+                blockActifY[3] =2;
+
+            }
+            else if (formeDuBloc == TypeBloc.LINE)//La ligne est coucher
+            {
+                blockActifX[0] =0;
+                blockActifY[0] =0;
+
+                blockActifX[1] =1;
+                blockActifY[1] =0;
+
+                blockActifX[2] =2;
+                blockActifY[2] =0;
+
+                blockActifX[3] =3;
+                blockActifY[3] =0;
+            }
+            else if (formeDuBloc == TypeBloc.S)
+            {
+                blockActifX[0] =2;
+                blockActifY[0] =0;
+
+                blockActifX[1] =1;
+                blockActifY[1] =0;
+
+                blockActifX[2] =1;
+                blockActifY[2] =1;
+
+                blockActifX[3] =0;
+                blockActifY[3] =1;
+            }
+            else if (formeDuBloc == TypeBloc.SQUARE)
+            {
+                blockActifX[0] =0;
+                blockActifY[0] =0;
+
+                blockActifX[1] =1;
+                blockActifY[1] =0;
+
+                blockActifX[2] =0;
+                blockActifY[2] =1;
+
+                blockActifX[3] =1;
+                blockActifY[3] =1;
+            }
+            else if (formeDuBloc == TypeBloc.T)
+            {
+                blockActifX[0] =0;
+                blockActifY[0] =0;
+
+                blockActifX[1] =1;
+                blockActifY[1] =0;
+
+                blockActifX[2] =2;
+                blockActifY[2] =0;
+
+                blockActifX[3] =1;
+                blockActifY[3] =1;
+            }
+            else if (formeDuBloc == TypeBloc.Z)
+            {
+                blockActifX[0] =0;
+                blockActifY[0] =0;
+
+                blockActifX[1] =1;
+                blockActifY[1] =0;
+
+                blockActifX[2] =1;
+                blockActifY[2] =1;
+
+                blockActifX[3] =2;
+                blockActifY[3] =1;
+            }
+            for(int i =0;i<blockActifX.Length;i++)
+            {
+                positionJoueur[ligneCourante + blockActifY[i], coloneCourante + blockActifX[i]] = 1;
+            }
+
         }
     }
 }
