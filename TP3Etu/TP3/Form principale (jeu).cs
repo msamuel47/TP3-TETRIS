@@ -208,18 +208,40 @@ namespace TP3
             bool peutBouger = true;
             if (sens == Deplacement.DOWN)
             {
-                for (int i = 0; i < blocActifY.Length -1; i++)
-                {//watch le zéros a la fin
-                    if (positionJoueur[blocActifY[i] + ligneCourante, blocActifX[i] + coloneCourante] == 2 || blocActifY[i] + ligneCourante == positionJoueur.GetLength(0)-1)
+                // verifie si chacun des blocs est sur la limite du tableau
+                if (blocActifY[0] + ligneCourante == positionJoueur.GetLength(0) - 1
+                       || blocActifY[1] + ligneCourante == positionJoueur.GetLength(0) - 1
+                       || blocActifY[2] + ligneCourante == positionJoueur.GetLength(0) - 1
+                       || blocActifY[3] + ligneCourante == positionJoueur.GetLength(0) - 1)
+                {
+                    peutBouger = false;
+                    for (int j = 0; j < blocActifY.Length ; j++)
                     {
-                        peutBouger = false;
-                        for (int j = 0; j < blocActifY.Length - 1; j++)
-                        {
-                            tableauDeJeu[blocActifY[i] + ligneCourante, blocActifX[i] + coloneCourante] = TypeBloc.FROZEN;
-                        }
-                        GenererBlock();
+                        positionJoueur[blocActifY[j] + ligneCourante, blocActifX[j] + coloneCourante] = 2;
+                        tableauDeJeu[blocActifY[j] + ligneCourante, blocActifX[j] + coloneCourante] = TypeBloc.FROZEN;
                     }
+                    GenererBlock();
                 }
+                //verifie si les block en dessous sint gelées
+                else
+                {
+                    for (int i = 0; i < blocActifY.Length - 1; i++)
+                    {//watch le zéros a la fin
+
+                        if (positionJoueur[blocActifY[i] + ligneCourante + 1, blocActifX[i] + coloneCourante] == 2)
+                        {
+                            peutBouger = false;
+                            for (int j = 0; j < blocActifY.Length ; j++)
+                            {
+                                positionJoueur[blocActifY[j] + ligneCourante, blocActifX[j] + coloneCourante] = 2;
+                                tableauDeJeu[blocActifY[j] + ligneCourante, blocActifX[j] + coloneCourante] = TypeBloc.FROZEN;
+                            }
+                            GenererBlock();
+                        }
+                    }
+
+                    }
+                
             }
             else if (sens == Deplacement.RIGHT)
             {
