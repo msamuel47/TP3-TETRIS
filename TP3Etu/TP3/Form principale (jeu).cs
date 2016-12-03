@@ -268,11 +268,23 @@ namespace TP3
             }
             else if(sens == Deplacement.ROTATE_CLOCKWISE)
             {
-
+                if(    Math.Abs(blocActifY[0]) > coloneCourante + 1 || Math.Abs(blocActifY[0]) > tableauDeJeu.GetLength(1) - coloneCourante + 1
+                    || Math.Abs(blocActifY[1]) > coloneCourante + 1 || Math.Abs(blocActifY[1]) > tableauDeJeu.GetLength(1) - coloneCourante + 1
+                    || Math.Abs(blocActifY[2]) > coloneCourante + 1 || Math.Abs(blocActifY[2]) > tableauDeJeu.GetLength(1) - coloneCourante + 1
+                    || Math.Abs(blocActifY[3]) > coloneCourante + 1 || Math.Abs(blocActifY[3]) > tableauDeJeu.GetLength(1) - coloneCourante + 1)
+                {
+                    peutBouger = false;
+                }
             }
             else if(sens == Deplacement.ROTATE_COUNTERCLOCKWISE)
             {
-
+                if (  Math.Abs(blocActifY[0]) > coloneCourante + 1 || Math.Abs(blocActifY[0]) > Math.Abs( coloneCourante + 1 - tableauDeJeu.GetLength(1))
+                   || Math.Abs(blocActifY[1]) > coloneCourante + 1 || Math.Abs(blocActifY[1]) > Math.Abs( coloneCourante + 1 - tableauDeJeu.GetLength(1))
+                   || Math.Abs(blocActifY[2]) > coloneCourante + 1 || Math.Abs(blocActifY[2]) > Math.Abs( coloneCourante + 1 - tableauDeJeu.GetLength(1))
+                   || Math.Abs(blocActifY[3]) > coloneCourante + 1 || Math.Abs(blocActifY[3]) > Math.Abs( coloneCourante + 1 - tableauDeJeu.GetLength(1)))
+                {
+                    peutBouger = false;
+                }
             }
             return peutBouger;
         }
