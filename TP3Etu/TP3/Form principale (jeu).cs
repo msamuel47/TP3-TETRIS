@@ -16,8 +16,9 @@ namespace TP3
         public int nbColones = 10;
         public int nbLignes = 20;
         public TypeBloc[,] tableauDeJeu = null;
-        private int[] blocActifY = null; // initialisé a la création du bloc //felix
-       private int[] blocActifX = null; // "               "           "
+        private int[] blocActifY = null; 
+        private int[] blocActifX = null;
+        bool[] etatDesLignesPleines = new bool[20] { true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true };
         int[,] positionJoueur = null;
         int ligneCourante = 0;
         int coloneCourante = 0;
@@ -144,12 +145,13 @@ namespace TP3
         #endregion
 
         #region Affichage de la table de Jeu
-        /// <summary> //Sam V.
+        //pierre + felix
+        /// <summary> 
         /// Permet l'affichage du tableau à chaque fois que la méthode est appelée
         /// </summary>
         private void DessinerTableDeJeu()
         {
-            //pierre
+            
             for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
             {
                 for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
@@ -219,7 +221,9 @@ namespace TP3
                     {
                         positionJoueur[blocActifY[j] + ligneCourante, blocActifX[j] + coloneCourante] = 2;
                         tableauDeJeu[blocActifY[j] + ligneCourante, blocActifX[j] + coloneCourante] = TypeBloc.FROZEN;
+                      
                     }
+                    VerifierSiLigneComplette();
                     GenererBlock();
                 }
                 //verifie si les block en dessous sint gelées
@@ -268,20 +272,28 @@ namespace TP3
             }
             else if(sens == Deplacement.ROTATE_CLOCKWISE)
             {
-                if(    Math.Abs(blocActifY[0]) > coloneCourante + 1 || Math.Abs(blocActifY[0]) > tableauDeJeu.GetLength(1) - coloneCourante + 1
-                    || Math.Abs(blocActifY[1]) > coloneCourante + 1 || Math.Abs(blocActifY[1]) > tableauDeJeu.GetLength(1) - coloneCourante + 1
-                    || Math.Abs(blocActifY[2]) > coloneCourante + 1 || Math.Abs(blocActifY[2]) > tableauDeJeu.GetLength(1) - coloneCourante + 1
-                    || Math.Abs(blocActifY[3]) > coloneCourante + 1 || Math.Abs(blocActifY[3]) > tableauDeJeu.GetLength(1) - coloneCourante + 1)
+                if (   Math.Abs(blocActifY[0]) > coloneCourante || Math.Abs(blocActifY[0]) > tableauDeJeu.GetLength(1) - coloneCourante
+                    || Math.Abs(blocActifY[1]) > coloneCourante || Math.Abs(blocActifY[1]) > tableauDeJeu.GetLength(1) - coloneCourante
+                    || Math.Abs(blocActifY[2]) > coloneCourante || Math.Abs(blocActifY[2]) > tableauDeJeu.GetLength(1) - coloneCourante
+                    || Math.Abs(blocActifY[3]) > coloneCourante || Math.Abs(blocActifY[3]) > tableauDeJeu.GetLength(1) - coloneCourante
+                    || Math.Abs(blocActifX[0]) > ligneCourante || Math.Abs(blocActifX[0]) > tableauDeJeu.GetLength(0) - ligneCourante
+                    || Math.Abs(blocActifX[1]) > ligneCourante || Math.Abs(blocActifX[1]) > tableauDeJeu.GetLength(0) - ligneCourante
+                    || Math.Abs(blocActifX[2]) > ligneCourante || Math.Abs(blocActifX[2]) > tableauDeJeu.GetLength(0) - ligneCourante
+                    || Math.Abs(blocActifX[3]) > ligneCourante || Math.Abs(blocActifX[3]) > tableauDeJeu.GetLength(0) - ligneCourante )
                 {
                     peutBouger = false;
                 }
             }
             else if(sens == Deplacement.ROTATE_COUNTERCLOCKWISE)
             {
-                if (  Math.Abs(blocActifY[0]) > coloneCourante + 1 || Math.Abs(blocActifY[0]) > Math.Abs( coloneCourante + 1 - tableauDeJeu.GetLength(1))
-                   || Math.Abs(blocActifY[1]) > coloneCourante + 1 || Math.Abs(blocActifY[1]) > Math.Abs( coloneCourante + 1 - tableauDeJeu.GetLength(1))
-                   || Math.Abs(blocActifY[2]) > coloneCourante + 1 || Math.Abs(blocActifY[2]) > Math.Abs( coloneCourante + 1 - tableauDeJeu.GetLength(1))
-                   || Math.Abs(blocActifY[3]) > coloneCourante + 1 || Math.Abs(blocActifY[3]) > Math.Abs( coloneCourante + 1 - tableauDeJeu.GetLength(1)))
+                if (  Math.Abs(blocActifY[0]) > coloneCourante  || Math.Abs(blocActifY[0]) > Math.Abs( coloneCourante  - tableauDeJeu.GetLength(1))
+                   || Math.Abs(blocActifY[1]) > coloneCourante  || Math.Abs(blocActifY[1]) > Math.Abs( coloneCourante  - tableauDeJeu.GetLength(1))
+                   || Math.Abs(blocActifY[2]) > coloneCourante  || Math.Abs(blocActifY[2]) > Math.Abs( coloneCourante  - tableauDeJeu.GetLength(1))
+                   || Math.Abs(blocActifY[3]) > coloneCourante  || Math.Abs(blocActifY[3]) > Math.Abs( coloneCourante  - tableauDeJeu.GetLength(1))
+                   || Math.Abs(blocActifX[0]) > ligneCourante ||  Math.Abs(blocActifX[0]) > Math.Abs(ligneCourante - tableauDeJeu.GetLength(0))
+                   || Math.Abs(blocActifX[1]) > ligneCourante ||  Math.Abs(blocActifX[1]) > Math.Abs(ligneCourante - tableauDeJeu.GetLength(0))
+                   || Math.Abs(blocActifX[2]) > ligneCourante ||  Math.Abs(blocActifX[2]) > Math.Abs(ligneCourante - tableauDeJeu.GetLength(0))
+                   || Math.Abs(blocActifX[3]) > ligneCourante ||  Math.Abs(blocActifX[3]) > Math.Abs(ligneCourante - tableauDeJeu.GetLength(0)))
                 {
                     peutBouger = false;
                 }
@@ -329,7 +341,16 @@ namespace TP3
                 }
                 else if (sensDuDeplacement ==Deplacement.ROTATE_CLOCKWISE)
                 {
-                    
+                    for (int i = 0; i < blocActifX.Length; i++)
+                    {
+                        memoire = blocActifX[i];
+                        blocActifX[i] = blocActifY[i];
+                        blocActifY[i] = memoire;
+                        if (blocActifY[i] != 0)
+                        {
+                            blocActifY[i] = blocActifY[i] * -1;
+                        }
+                    }
                 }
                 else if (sensDuDeplacement ==Deplacement.ROTATE_COUNTERCLOCKWISE)
                 {
@@ -368,7 +389,7 @@ namespace TP3
                 }
             else if (e.KeyChar == 's' || e.KeyChar == (char) Keys.Down)
                 {
-                    DeplacerJoueur(Deplacement.ROTATE_COUNTERCLOCKWISE);
+                    DeplacerJoueur(Deplacement.DOWN);
                 }
          
         }
@@ -524,6 +545,67 @@ namespace TP3
                 positionJoueur[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = 1;
             }
 
+        }
+        //felix.b
+        /// <summary>
+        /// 
+        /// </summary>
+        void VerifierSiLigneComplette()
+        {
+            for(int i =0; i < etatDesLignesPleines.Length ; i++)
+            {
+                etatDesLignesPleines[i] = true;
+            }
+            for (int i = 0; i < tableauDeJeu.GetLength(0); i++)
+            {
+
+                for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
+                {
+                    if (tableauDeJeu[i, j] != TypeBloc.FROZEN)
+                    {
+                        etatDesLignesPleines[i] = false;
+                    }
+                }
+            }
+            //vider les lignes pleines
+            DecalerLignes();
+         }
+        //felix
+        /// <summary>
+        /// 
+        /// </summary>
+        void DecalerLignes()
+        {
+            for (int i = 19; i >= 0 ; i--)
+            {
+                if (etatDesLignesPleines[i] == true)
+                {
+                    for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
+                    {
+                        tableauDeJeu[i, j] = TypeBloc.NONE;
+
+                    }
+                    
+                    for(int a =i; a > 0; a--)
+                    {
+                        for(int b = 0; b < 10;b++)
+                        {
+                            tableauDeJeu[a, b] = tableauDeJeu[a - 1, b];
+                        }
+                    }
+
+                }
+            }
+        }
+        //felix
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void quitterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
