@@ -41,6 +41,7 @@
             this.commencerLaPartie_btn = new System.Windows.Forms.Button();
             this.timerPourDescenteDuJeu = new System.Windows.Forms.Timer(this.components);
             this.score = new System.Windows.Forms.Label();
+            this.affichageDuNiveau = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -187,13 +188,23 @@
             this.score.Name = "score";
             this.score.Size = new System.Drawing.Size(100, 23);
             this.score.TabIndex = 4;
-            this.score.Text = "label1";
+            this.score.Text = "score : 0";
+            // 
+            // affichageDuNiveau
+            // 
+            this.affichageDuNiveau.Location = new System.Drawing.Point(222, 24);
+            this.affichageDuNiveau.Name = "affichageDuNiveau";
+            this.affichageDuNiveau.Size = new System.Drawing.Size(135, 19);
+            this.affichageDuNiveau.TabIndex = 5;
+            this.affichageDuNiveau.Text = "niveau : 1";
+            this.affichageDuNiveau.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 476);
+            this.Controls.Add(this.affichageDuNiveau);
             this.Controls.Add(this.score);
             this.Controls.Add(this.commencerLaPartie_btn);
             this.Controls.Add(this.tableauJeu);
@@ -225,6 +236,7 @@
         private System.Windows.Forms.Button commencerLaPartie_btn;
         private System.Windows.Forms.Timer timerPourDescenteDuJeu;
         private System.Windows.Forms.Label score;
+        private System.Windows.Forms.Label affichageDuNiveau;
     }
 }
 

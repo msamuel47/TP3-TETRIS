@@ -23,8 +23,10 @@ namespace TP3
         int ligneCourante = 0;
         int coloneCourante = 0;
         Random rnd = new Random();
-        public int pointage = 0;
-       
+        int pointage = 0;
+        string pointsString = "";
+        int niveau = 1;
+        int nombreDeLigneEffacerNiveau = 0;
         #endregion
 
         public Form1()
@@ -196,38 +198,7 @@ namespace TP3
                          }
 
                     }
-                    //  for (int i = 0; i < 4; i++)
-                    //  {
-                    //     if (tableauDeJeu[ligneCourante + blocActifY[i] , coloneCourante + blocActifX[i]] == TypeBloc.Z)
-                    //     {
-                    //         toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Red;
-                    //     }
-                    //       else if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] == TypeBloc.T)
-                    //        {
-                    //            toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Violet;
-                    //         }
-                    //         else if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] == TypeBloc.SQUARE)
-                    //         {
-                    //            toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Yellow;
-                    //        }
-                    //      else if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] == TypeBloc.S)
-                    //      {
-                    //         toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Green;
-                    //     }
-                    //     else if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] == TypeBloc.LINE)
-                    //    {
-                    //         toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Aqua;
-                    //     }
-                    //     else if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] == TypeBloc.L)
-                    //    {
-                    //        toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Orange;
-                    //    }
-                    //   else if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] == TypeBloc.J)
-                    //    {
-                    //      toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Blue;
-                    //   }
-
-                    //  }
+                
 
                 }
 
@@ -283,7 +254,17 @@ namespace TP3
                       
                     }
                     VerifierSiLigneComplette();
-                    GenererBlock();
+                    if (         tableauDeJeu[blocActifY[0], blocActifX[0]] == TypeBloc.NONE
+                              && tableauDeJeu[blocActifY[1], blocActifX[1]] == TypeBloc.NONE
+                              && tableauDeJeu[blocActifY[2], blocActifX[2]] == TypeBloc.NONE
+                              && tableauDeJeu[blocActifY[3], blocActifX[3]] == TypeBloc.NONE)
+                    {
+                        GenererBlock();
+                    }
+                    else
+                    {
+                        MessageBox.Show("souhaiter vous recommencer une party?", "Oups partie terminé", MessageBoxButtons.RetryCancel, MessageBoxIcon.Exclamation);
+                    }
                 }
                 //verifie si les block en dessous sint gelées
                 else
@@ -299,7 +280,18 @@ namespace TP3
                                
                                 tableauDeJeu[blocActifY[j] + ligneCourante, blocActifX[j] + coloneCourante] = TypeBloc.FROZEN;
                             }
-                            GenererBlock();
+                            VerifierSiLigneComplette();
+                            if (   tableauDeJeu[blocActifY[0],blocActifX[0]] == TypeBloc.NONE
+                                && tableauDeJeu[blocActifY[1],blocActifX[1]] == TypeBloc.NONE
+                                && tableauDeJeu[blocActifY[2],blocActifX[2]] == TypeBloc.NONE
+                                && tableauDeJeu[blocActifY[3],blocActifX[3]] == TypeBloc.NONE)
+                            {
+                                GenererBlock();
+                            }
+                            else
+                            {
+                                MessageBox.Show("souhaiter vous recommencer une party?", "Oups partie terminé", MessageBoxButtons.RetryCancel, MessageBoxIcon.Exclamation);
+                            }
                         }
                     }
 
@@ -370,8 +362,19 @@ namespace TP3
         private void DebuterUnePartie_btnClick(object sender, EventArgs e)
         {
             InitialiserJeu();
-            GenererBlock();
-           DessinerTableDeJeu();
+
+            if (                tableauDeJeu[blocActifY[0], blocActifX[0]] == TypeBloc.NONE
+                             && tableauDeJeu[blocActifY[1], blocActifX[1]] == TypeBloc.NONE
+                             && tableauDeJeu[blocActifY[2], blocActifX[2]] == TypeBloc.NONE
+                             && tableauDeJeu[blocActifY[3], blocActifX[3]] == TypeBloc.NONE)
+            {
+                GenererBlock();
+            }
+            else
+            {
+                MessageBox.Show("souhaiter vous recommencer une party?","Oups partie terminé",MessageBoxButtons.RetryCancel,MessageBoxIcon.Exclamation);
+            }
+            DessinerTableDeJeu();
             timerPourDescenteDuJeu.Start();
            
         }
@@ -455,8 +458,12 @@ namespace TP3
         //sam
         private void FaireDescendreCubeDeJeu_TimerTick(object sender, EventArgs e)
         {
+            
+            pointsString = pointage.ToString();
+            score.Text = "score :" + pointsString;
             DeplacerJoueur(Deplacement.DOWN);
-            score.Text = pointage;
+            
+            
         }
         //felix.b
         /// <summary>
@@ -514,10 +521,7 @@ namespace TP3
 
                 blocActifX[3] =0;
                 blocActifY[3] =2;
-                for (int i = 0; i < blocActifX.Length; i++)
-                {
-                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.J;
-                }
+            
             }
             else if (formeDuBloc == TypeBloc.L)
             {
@@ -532,10 +536,7 @@ namespace TP3
 
                 blocActifX[3] =1;
                 blocActifY[3] =2;
-                for (int i = 0; i < blocActifX.Length; i++)
-                {
-                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.L;
-                }
+             
 
             }
             else if (formeDuBloc == TypeBloc.LINE)//La ligne est coucher
@@ -551,10 +552,7 @@ namespace TP3
 
                 blocActifX[3] =3;
                 blocActifY[3] =0;
-                for (int i = 0; i < blocActifX.Length; i++)
-                {
-                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.LINE;
-                }
+             
             }
             else if (formeDuBloc == TypeBloc.S)
             {
@@ -569,10 +567,7 @@ namespace TP3
 
                 blocActifX[3] =0;
                 blocActifY[3] =1;
-                for (int i = 0; i < blocActifX.Length; i++)
-                {
-                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.S;
-                }
+             
             }
             else if (formeDuBloc == TypeBloc.SQUARE)
             {
@@ -587,10 +582,7 @@ namespace TP3
 
                 blocActifX[3] =1;
                 blocActifY[3] =1;
-                for (int i = 0; i < blocActifX.Length; i++)
-                {
-                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.SQUARE;
-                }
+               
             }
             else if (formeDuBloc == TypeBloc.T)
             {
@@ -605,10 +597,7 @@ namespace TP3
 
                 blocActifX[3] =1;
                 blocActifY[3] =1;
-                for (int i = 0; i < blocActifX.Length; i++)
-                {
-                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.T;
-                }
+             
             }
             else if (formeDuBloc == TypeBloc.Z)
             {
@@ -623,10 +612,7 @@ namespace TP3
 
                 blocActifX[3] =2;
                 blocActifY[3] =1;
-                for (int i = 0; i < blocActifX.Length; i++)
-                {
-                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.Z;
-                }
+            
             }
        
 
@@ -665,6 +651,22 @@ namespace TP3
             {
                 if (etatDesLignesPleines[i] == true)
                 {
+                    
+                    // de 1 donner des points et ajuster le niveau de difficulté si requis
+                    pointage += 100;
+                    nombreDeLigneEffacerNiveau += 1;
+                    if(nombreDeLigneEffacerNiveau >= 5)
+                    {
+                        nombreDeLigneEffacerNiveau = 0;
+                        if (timerPourDescenteDuJeu.Interval > 200)
+                        {
+                            niveau += 1;
+                            string difficulte = niveau.ToString();
+                            timerPourDescenteDuJeu.Interval -= 200;
+                            affichageDuNiveau.Text = "niveau : " + difficulte;
+                        }
+                    }
+                    
                     //vider la ligne pleine
                     for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
                     {
