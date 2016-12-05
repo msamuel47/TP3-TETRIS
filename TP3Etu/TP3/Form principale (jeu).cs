@@ -19,10 +19,11 @@ namespace TP3
         private int[] blocActifY = null; 
         private int[] blocActifX = null;
         bool[] etatDesLignesPleines = new bool[20] { true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true };
-        int[,] positionJoueur = null;
+        TypeBloc formeDuBloc = TypeBloc.SQUARE;
         int ligneCourante = 0;
         int coloneCourante = 0;
         Random rnd = new Random();
+        public int pointage = 0;
        
         #endregion
 
@@ -129,14 +130,12 @@ namespace TP3
         {
             mediaPlayer.URL = "art/Wakfu AMV - Are U Ready _ Goultard Le Barbare Tribute _.mp3";
 
-            mediaPlayer.controls.play();
+           
             if (mediaPlayer.playState == WMPPlayState.wmppsPaused || mediaPlayer.playState == WMPPlayState.wmppsStopped)    
                 {
                     mediaPlayer.controls.play();
-                    mediaPlayer.controls.play();
                 }
-            else
-            if (mediaPlayer.playState == WMPPlayState.wmppsPlaying)
+            else if (mediaPlayer.playState == WMPPlayState.wmppsPlaying)
                 { 
                     mediaPlayer.controls.stop();
                 }
@@ -164,13 +163,73 @@ namespace TP3
                         toutesImagesVisuelles[i, j].BackColor = Color.Black;
                 }
             }
+            for (int i = 0; i < blocActifX.Length; i++)
+                     {
+               
+                         if (formeDuBloc == TypeBloc.Z)
+                         {
+                         toutesImagesVisuelles[ligneCourante + blocActifY[i] , coloneCourante + blocActifX[i]].BackColor = Color.Red;
+                         }
+                         else if (formeDuBloc == TypeBloc.T)
+                         {
+                          toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Violet;
+                         }
+                         else if (formeDuBloc == TypeBloc.SQUARE)
+                         {
+                          toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Yellow;
+                         }
+                         else if (formeDuBloc == TypeBloc.S)
+                         {
+                          toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Green;
+                         }
+                         else if (formeDuBloc == TypeBloc.LINE)
+                         {
+                          toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Aqua;
+                         }
+                         else if (formeDuBloc == TypeBloc.L)
+                         {
+                          toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Orange;
+                         }
+                         else if (formeDuBloc == TypeBloc.J)
+                         {
+                          toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Blue;
+                         }
 
-            for (int i = 0; i < 4; i++)
-            {
-                toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Blue;
-            }
-              
-        }
+                    }
+                    //  for (int i = 0; i < 4; i++)
+                    //  {
+                    //     if (tableauDeJeu[ligneCourante + blocActifY[i] , coloneCourante + blocActifX[i]] == TypeBloc.Z)
+                    //     {
+                    //         toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Red;
+                    //     }
+                    //       else if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] == TypeBloc.T)
+                    //        {
+                    //            toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Violet;
+                    //         }
+                    //         else if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] == TypeBloc.SQUARE)
+                    //         {
+                    //            toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Yellow;
+                    //        }
+                    //      else if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] == TypeBloc.S)
+                    //      {
+                    //         toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Green;
+                    //     }
+                    //     else if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] == TypeBloc.LINE)
+                    //    {
+                    //         toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Aqua;
+                    //     }
+                    //     else if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] == TypeBloc.L)
+                    //    {
+                    //        toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Orange;
+                    //    }
+                    //   else if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] == TypeBloc.J)
+                    //    {
+                    //      toutesImagesVisuelles[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]].BackColor = Color.Blue;
+                    //   }
+
+                    //  }
+
+                }
 
 
         #endregion
@@ -183,7 +242,7 @@ namespace TP3
         void InitialiserJeu()
         {
             
-            positionJoueur = new int[nbLignes, nbColones];
+          
             tableauDeJeu = new TypeBloc[nbLignes, nbColones];
             blocActifX = new int[4];
             blocActifY = new int[4];
@@ -191,7 +250,7 @@ namespace TP3
                 {
                     for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
                     {
-                        positionJoueur[i, j] = 0;
+                       
                             tableauDeJeu[i, j] = TypeBloc.NONE;
                         }
                 }
@@ -211,15 +270,15 @@ namespace TP3
             if (sens == Deplacement.DOWN)
             {
                 // verifie si chacun des blocs est sur la limite du tableau
-                if (blocActifY[0] + ligneCourante == positionJoueur.GetLength(0) - 1
-                       || blocActifY[1] + ligneCourante == positionJoueur.GetLength(0) - 1
-                       || blocActifY[2] + ligneCourante == positionJoueur.GetLength(0) - 1
-                       || blocActifY[3] + ligneCourante == positionJoueur.GetLength(0) - 1)
+                if (blocActifY[0] + ligneCourante == tableauDeJeu.GetLength(0) - 1
+                       || blocActifY[1] + ligneCourante == tableauDeJeu.GetLength(0) - 1
+                       || blocActifY[2] + ligneCourante == tableauDeJeu.GetLength(0) - 1
+                       || blocActifY[3] + ligneCourante == tableauDeJeu.GetLength(0) - 1)
                 {
                     peutBouger = false;
                     for (int j = 0; j < blocActifY.Length ; j++)
                     {
-                        positionJoueur[blocActifY[j] + ligneCourante, blocActifX[j] + coloneCourante] = 2;
+                    
                         tableauDeJeu[blocActifY[j] + ligneCourante, blocActifX[j] + coloneCourante] = TypeBloc.FROZEN;
                       
                     }
@@ -232,12 +291,12 @@ namespace TP3
                     for (int i = 0; i < blocActifY.Length - 1; i++)
                     {//watch le zéros a la fin
 
-                        if (positionJoueur[blocActifY[i] + ligneCourante + 1, blocActifX[i] + coloneCourante] == 2)
+                        if (tableauDeJeu[blocActifY[i] + ligneCourante + 1, blocActifX[i] + coloneCourante] == TypeBloc.FROZEN)
                         {
                             peutBouger = false;
                             for (int j = 0; j < blocActifY.Length ; j++)
                             {
-                                positionJoueur[blocActifY[j] + ligneCourante, blocActifX[j] + coloneCourante] = 2;
+                               
                                 tableauDeJeu[blocActifY[j] + ligneCourante, blocActifX[j] + coloneCourante] = TypeBloc.FROZEN;
                             }
                             GenererBlock();
@@ -252,7 +311,7 @@ namespace TP3
                 for (int i = 0; i < blocActifX.Length ; i++)
                     {
                         
-                            if (positionJoueur[ligneCourante + blocActifY[i],coloneCourante + blocActifX[i]] == 2 || coloneCourante + blocActifX[i] ==positionJoueur.GetLength(1)-1)
+                            if (tableauDeJeu[ligneCourante + blocActifY[i],coloneCourante + blocActifX[i]] == TypeBloc.FROZEN || coloneCourante + blocActifX[i] == tableauDeJeu.GetLength(1)-1)
                             {
                                 peutBouger = false;
                             }
@@ -263,7 +322,7 @@ namespace TP3
             {
                 for (int i = 0; i < blocActifX.GetLength(0); i++)
                 {
-                    if (positionJoueur[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i] ] == 2 || coloneCourante + blocActifX[i] == 0)
+                    if (tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i] ] == TypeBloc.FROZEN || coloneCourante + blocActifX[i] == 0)
                     {
                         peutBouger = false;
                     }
@@ -397,6 +456,7 @@ namespace TP3
         private void FaireDescendreCubeDeJeu_TimerTick(object sender, EventArgs e)
         {
             DeplacerJoueur(Deplacement.DOWN);
+            score.Text = pointage;
         }
         //felix.b
         /// <summary>
@@ -409,7 +469,7 @@ namespace TP3
         {
             coloneCourante = 0;
             ligneCourante = 0;
-            TypeBloc formeDuBloc = TypeBloc.SQUARE;
+           
             int typeDeBloc = rnd.Next(0, 7 + 1);
             if (typeDeBloc == 0)
             {
@@ -454,6 +514,10 @@ namespace TP3
 
                 blocActifX[3] =0;
                 blocActifY[3] =2;
+                for (int i = 0; i < blocActifX.Length; i++)
+                {
+                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.J;
+                }
             }
             else if (formeDuBloc == TypeBloc.L)
             {
@@ -468,6 +532,10 @@ namespace TP3
 
                 blocActifX[3] =1;
                 blocActifY[3] =2;
+                for (int i = 0; i < blocActifX.Length; i++)
+                {
+                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.L;
+                }
 
             }
             else if (formeDuBloc == TypeBloc.LINE)//La ligne est coucher
@@ -483,6 +551,10 @@ namespace TP3
 
                 blocActifX[3] =3;
                 blocActifY[3] =0;
+                for (int i = 0; i < blocActifX.Length; i++)
+                {
+                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.LINE;
+                }
             }
             else if (formeDuBloc == TypeBloc.S)
             {
@@ -497,6 +569,10 @@ namespace TP3
 
                 blocActifX[3] =0;
                 blocActifY[3] =1;
+                for (int i = 0; i < blocActifX.Length; i++)
+                {
+                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.S;
+                }
             }
             else if (formeDuBloc == TypeBloc.SQUARE)
             {
@@ -511,6 +587,10 @@ namespace TP3
 
                 blocActifX[3] =1;
                 blocActifY[3] =1;
+                for (int i = 0; i < blocActifX.Length; i++)
+                {
+                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.SQUARE;
+                }
             }
             else if (formeDuBloc == TypeBloc.T)
             {
@@ -525,6 +605,10 @@ namespace TP3
 
                 blocActifX[3] =1;
                 blocActifY[3] =1;
+                for (int i = 0; i < blocActifX.Length; i++)
+                {
+                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.T;
+                }
             }
             else if (formeDuBloc == TypeBloc.Z)
             {
@@ -539,11 +623,12 @@ namespace TP3
 
                 blocActifX[3] =2;
                 blocActifY[3] =1;
+                for (int i = 0; i < blocActifX.Length; i++)
+                {
+                    tableauDeJeu[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = TypeBloc.Z;
+                }
             }
-            for(int i =0;i<blocActifX.Length;i++)
-            {
-                positionJoueur[ligneCourante + blocActifY[i], coloneCourante + blocActifX[i]] = 1;
-            }
+       
 
         }
         //felix.b
@@ -576,24 +661,30 @@ namespace TP3
         /// </summary>
         void DecalerLignes()
         {
-            for (int i = 19; i >= 0 ; i--)
+            for (int i = 1; i < 20 ; i++)
             {
                 if (etatDesLignesPleines[i] == true)
                 {
+                    //vider la ligne pleine
                     for (int j = 0; j < tableauDeJeu.GetLength(1); j++)
                     {
                         tableauDeJeu[i, j] = TypeBloc.NONE;
 
                     }
-                    
+                    //decaler les autres lignes supérieurs
                     for(int a =i; a > 0; a--)
                     {
                         for(int b = 0; b < 10;b++)
                         {
                             tableauDeJeu[a, b] = tableauDeJeu[a - 1, b];
                         }
+                        
                     }
-
+                    //vider la premiere ligne
+                    for(int j = 0; j<10;j++)
+                    {
+                        tableauDeJeu[0, j] = TypeBloc.NONE;
+                    }
                 }
             }
         }

@@ -40,6 +40,7 @@
             this.personnaliserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commencerLaPartie_btn = new System.Windows.Forms.Button();
             this.timerPourDescenteDuJeu = new System.Windows.Forms.Timer(this.components);
+            this.score = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -180,11 +181,20 @@
             this.timerPourDescenteDuJeu.Interval = 1000;
             this.timerPourDescenteDuJeu.Tick += new System.EventHandler(this.FaireDescendreCubeDeJeu_TimerTick);
             // 
+            // score
+            // 
+            this.score.Location = new System.Drawing.Point(457, 58);
+            this.score.Name = "score";
+            this.score.Size = new System.Drawing.Size(100, 23);
+            this.score.TabIndex = 4;
+            this.score.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 476);
+            this.Controls.Add(this.score);
             this.Controls.Add(this.commencerLaPartie_btn);
             this.Controls.Add(this.tableauJeu);
             this.Controls.Add(this.menuStrip1);
@@ -214,6 +224,7 @@
         private System.Windows.Forms.ToolStripMenuItem personnaliserToolStripMenuItem;
         private System.Windows.Forms.Button commencerLaPartie_btn;
         private System.Windows.Forms.Timer timerPourDescenteDuJeu;
+        private System.Windows.Forms.Label score;
     }
 }
 
