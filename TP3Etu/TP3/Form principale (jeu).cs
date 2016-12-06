@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace TP3
 {
-    public partial class Form1 : Form
+    public partial class FenetreDeJeu : Form
     {
         WindowsMediaPlayer mediaPlayer = new WindowsMediaPlayer();
 
@@ -31,7 +31,7 @@ namespace TP3
         bool peutEncoreJouer = true;
         #endregion
 
-        public Form1()
+        public FenetreDeJeu()
         {
             InitializeComponent();
         }
@@ -315,28 +315,28 @@ namespace TP3
             }
             else if(sens == Deplacement.ROTATE_CLOCKWISE)
             {
-                if (   Math.Abs(blocActifY[0]) > coloneCourante || Math.Abs(blocActifY[0]) > tableauDeJeu.GetLength(1) - coloneCourante
-                    || Math.Abs(blocActifY[1]) > coloneCourante || Math.Abs(blocActifY[1]) > tableauDeJeu.GetLength(1) - coloneCourante
-                    || Math.Abs(blocActifY[2]) > coloneCourante || Math.Abs(blocActifY[2]) > tableauDeJeu.GetLength(1) - coloneCourante
-                    || Math.Abs(blocActifY[3]) > coloneCourante || Math.Abs(blocActifY[3]) > tableauDeJeu.GetLength(1) - coloneCourante
-                    || Math.Abs(blocActifX[0]) > ligneCourante || Math.Abs(blocActifX[0]) > tableauDeJeu.GetLength(0) - ligneCourante
-                    || Math.Abs(blocActifX[1]) > ligneCourante || Math.Abs(blocActifX[1]) > tableauDeJeu.GetLength(0) - ligneCourante
-                    || Math.Abs(blocActifX[2]) > ligneCourante || Math.Abs(blocActifX[2]) > tableauDeJeu.GetLength(0) - ligneCourante
-                    || Math.Abs(blocActifX[3]) > ligneCourante || Math.Abs(blocActifX[3]) > tableauDeJeu.GetLength(0) - ligneCourante )
+                if (   Math.Abs(blocActifY[0]) > coloneCourante || Math.Abs(blocActifY[0]) > tableauDeJeu.GetLength(1)-1 - coloneCourante
+                    || Math.Abs(blocActifY[1]) > coloneCourante || Math.Abs(blocActifY[1]) > tableauDeJeu.GetLength(1) -1- coloneCourante
+                    || Math.Abs(blocActifY[2]) > coloneCourante || Math.Abs(blocActifY[2]) > tableauDeJeu.GetLength(1) -1- coloneCourante
+                    || Math.Abs(blocActifY[3]) > coloneCourante || Math.Abs(blocActifY[3]) > tableauDeJeu.GetLength(1) -1- coloneCourante
+                    || Math.Abs(blocActifX[0]) > ligneCourante || Math.Abs(blocActifX[0]) > tableauDeJeu.GetLength(0) -1- ligneCourante
+                    || Math.Abs(blocActifX[1]) > ligneCourante || Math.Abs(blocActifX[1]) > tableauDeJeu.GetLength(0) -1- ligneCourante
+                    || Math.Abs(blocActifX[2]) > ligneCourante || Math.Abs(blocActifX[2]) > tableauDeJeu.GetLength(0) -1- ligneCourante
+                    || Math.Abs(blocActifX[3]) > ligneCourante || Math.Abs(blocActifX[3]) > tableauDeJeu.GetLength(0) -1- ligneCourante )
                 {
                     peutBouger = false;
                 }
             }
             else if(sens == Deplacement.ROTATE_COUNTERCLOCKWISE)
             {
-                if (  Math.Abs(blocActifY[0]) > coloneCourante  || Math.Abs(blocActifY[0]) > Math.Abs( coloneCourante  - tableauDeJeu.GetLength(1))
-                   || Math.Abs(blocActifY[1]) > coloneCourante  || Math.Abs(blocActifY[1]) > Math.Abs( coloneCourante  - tableauDeJeu.GetLength(1))
-                   || Math.Abs(blocActifY[2]) > coloneCourante  || Math.Abs(blocActifY[2]) > Math.Abs( coloneCourante  - tableauDeJeu.GetLength(1))
-                   || Math.Abs(blocActifY[3]) > coloneCourante  || Math.Abs(blocActifY[3]) > Math.Abs( coloneCourante  - tableauDeJeu.GetLength(1))
-                   || Math.Abs(blocActifX[0]) > ligneCourante ||  Math.Abs(blocActifX[0]) > Math.Abs(ligneCourante - tableauDeJeu.GetLength(0))
-                   || Math.Abs(blocActifX[1]) > ligneCourante ||  Math.Abs(blocActifX[1]) > Math.Abs(ligneCourante - tableauDeJeu.GetLength(0))
-                   || Math.Abs(blocActifX[2]) > ligneCourante ||  Math.Abs(blocActifX[2]) > Math.Abs(ligneCourante - tableauDeJeu.GetLength(0))
-                   || Math.Abs(blocActifX[3]) > ligneCourante ||  Math.Abs(blocActifX[3]) > Math.Abs(ligneCourante - tableauDeJeu.GetLength(0)))
+                if (  Math.Abs(blocActifY[0]) > coloneCourante  || Math.Abs(blocActifY[0]) > Math.Abs( coloneCourante  -1- tableauDeJeu.GetLength(1))
+                   || Math.Abs(blocActifY[1]) > coloneCourante  || Math.Abs(blocActifY[1]) > Math.Abs( coloneCourante  -1- tableauDeJeu.GetLength(1))
+                   || Math.Abs(blocActifY[2]) > coloneCourante  || Math.Abs(blocActifY[2]) > Math.Abs( coloneCourante  -1- tableauDeJeu.GetLength(1))
+                   || Math.Abs(blocActifY[3]) > coloneCourante  || Math.Abs(blocActifY[3]) > Math.Abs( coloneCourante  -1- tableauDeJeu.GetLength(1))
+                   || Math.Abs(blocActifX[0]) > ligneCourante ||  Math.Abs(blocActifX[0]) > Math.Abs(ligneCourante -1- tableauDeJeu.GetLength(0))
+                   || Math.Abs(blocActifX[1]) > ligneCourante ||  Math.Abs(blocActifX[1]) > Math.Abs(ligneCourante -1- tableauDeJeu.GetLength(0))
+                   || Math.Abs(blocActifX[2]) > ligneCourante ||  Math.Abs(blocActifX[2]) > Math.Abs(ligneCourante -1- tableauDeJeu.GetLength(0))
+                   || Math.Abs(blocActifX[3]) > ligneCourante ||  Math.Abs(blocActifX[3]) > Math.Abs(ligneCourante -1- tableauDeJeu.GetLength(0)))
                 {
                     peutBouger = false;
                 }
@@ -385,7 +385,6 @@ namespace TP3
         /// <param name="sensDuDeplacement">direction dans le quel va se deplacer le bloque ou tourné</param>
         private void DeplacerJoueur(Deplacement sensDuDeplacement)
         {
-        
             int memoire = 0;
             if (BlocPeutBouger(sensDuDeplacement) == true)
               {
@@ -466,7 +465,7 @@ namespace TP3
         private void ToucheApuye_KeyPress(object sender, KeyPressEventArgs e)
         {
             
-            if (e.KeyChar == 'a' )
+            if (e.KeyChar == 'a'  )
                 {
                    DeplacerJoueur(Deplacement.LEFT); 
                 }

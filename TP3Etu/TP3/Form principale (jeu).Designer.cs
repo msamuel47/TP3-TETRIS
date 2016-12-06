@@ -1,6 +1,6 @@
 ﻿namespace TP3
 {
-  partial class Form1
+  partial class FenetreDeJeu
   {
     /// <summary>
     /// Variable nécessaire au concepteur.

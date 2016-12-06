@@ -49,6 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Deplacement.cs" />
+    <Compile Include="MenuPrincipale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuPrincipale.Designer.cs">
+      <DependentUpon>MenuPrincipale.cs</DependentUpon>
+    </Compile>
     <Compile Include="TypeBloc.cs" />
     <Compile Include="Configuration du jeu.cs">
       <SubType>Form</SubType>
@@ -69,6 +75,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form principale %28jeu%29.resx">
       <DependentUpon>Form principale %28jeu%29.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuPrincipale.resx">
+      <DependentUpon>MenuPrincipale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
