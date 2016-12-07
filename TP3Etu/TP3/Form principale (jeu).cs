@@ -12,7 +12,9 @@ namespace TP3
 
         #region Variable de jeu
 
+        // Initialisation des variables partagée et paramêtre du jeu
 
+           //Cette section est fait par Samuel et par Felix
         public int nbColones = 10;
         public int nbLignes = 20;
         public TypeBloc[,] tableauDeJeu = null;
@@ -91,7 +93,7 @@ namespace TP3
         #region Code à développer
 
         /// <summary>
-        /// Faites ici les appels requis pour vos tests unitaires.
+        /// Faites ici les appels requis pour vos tests unitaires. Les tests unitaires n'ont pas été effectuée
         /// </summary>
         void ExecuterTestsUnitaires()
         {
@@ -345,7 +347,7 @@ namespace TP3
         }
 
         #endregion
-        //sam +felix
+        //Samuel +felix
         /// <summary>
         /// Déclanché par le click du bouton "Commencer" , cette fonction engendre le début d'une partie.
         /// </summary>
@@ -461,7 +463,12 @@ namespace TP3
                  
      
         }
-        //sam
+        //Samuel
+        /// <summary>
+        /// Cette méthode prend en compte les touches entrées par le joueur et retourne des déplacement si les bonnes touches sont appuyées
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToucheApuye_KeyPress(object sender, KeyPressEventArgs e)
         {
             
@@ -483,7 +490,12 @@ namespace TP3
                 }
          
         }
-        //sam
+        //Samuel
+        /// <summary>
+        /// Cette méthode est un timer qui permet de faire descendre le cube en un temps donné en MilliSecondes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FaireDescendreCubeDeJeu_TimerTick(object sender, EventArgs e)
         {
             
@@ -495,7 +507,8 @@ namespace TP3
         }
         //felix.b
         /// <summary>
-        /// 
+        /// Cette méthode permet de choisir une  forme à générer au hasard
+        /// et contient ses formes
         /// </summary>
         /// <param name="ligneCourante"></param>
         /// <param name="coloneCourant"></param>
@@ -649,16 +662,16 @@ namespace TP3
                               && tableauDeJeu[blocActifY[3], blocActifX[3]] != TypeBloc.NONE)
             {
                 timerPourDescenteDuJeu.Stop();
-                MessageBox.Show("souhaiter vous recommencer une party?", "Oups partie terminé", MessageBoxButtons.RetryCancel, MessageBoxIcon.Exclamation);
+                MessageBox.Show("souhaiter vous recommencer une partie ?", "Oups partie terminé", MessageBoxButtons.RetryCancel, MessageBoxIcon.Exclamation);
                 
             }
 
 
 
         }
-        //felix.b
+        //Felix.b
         /// <summary>
-        /// 
+        /// PErmet de valider si il y a une ligne pleine dans le jeu et d'y mettre le score en conséquence 
         /// </summary>
         void VerifierSiLigneComplette()
         {
@@ -680,9 +693,9 @@ namespace TP3
             //vider les lignes pleines
             DecalerLignes();
          }
-        //felix
+        //Felix
         /// <summary>
-        /// 
+        /// PErmet de déclarer l'état des lignes
         /// </summary>
         void DecalerLignes()
         {
@@ -729,9 +742,9 @@ namespace TP3
                 }
             }
         }
-        //felix
+        //Felix et Samuel
         /// <summary>
-        /// 
+        /// Permet de quitter le jeu
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

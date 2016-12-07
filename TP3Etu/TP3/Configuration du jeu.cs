@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+// L'entièreté de cette Form à été effectué par Samuel V.
 namespace TP3
 {
     public partial class Configuration_du_jeu : Form
@@ -16,7 +16,12 @@ namespace TP3
         {
             InitializeComponent();
         }
-        
+        //Samuel V.
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void ChangerLaTextBoxNbLignes_Scoll(object sender, EventArgs e)
         {
             nbLignes_TextBox.Text = nbLignes_TrackBar.Value.ToString();
