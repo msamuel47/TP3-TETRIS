@@ -16,7 +16,7 @@ namespace TP3
     {
       Application.EnableVisualStyles( );
       Application.SetCompatibleTextRenderingDefault( false );
-      Application.Run( new MenuPrincipale( ) );
+      Application.Run( new FenetreDeJeu( ) );
     }
   }
 }
